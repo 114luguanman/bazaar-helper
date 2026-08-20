@@ -379,6 +379,9 @@ class MonitorWorker(QObject):
 
 
 class Panel(QWidget):
+    partner_result_ready = Signal(str)
+    partner_hot_ready = Signal(str)
+
     def __init__(self, cfg: dict, overlay: PetOverlay):
         super().__init__()
         self.cfg = cfg
@@ -437,6 +440,7 @@ class Panel(QWidget):
         tabs = QTabWidget(content)
         self._build_monitor_tab(tabs)
         self._build_recommend_tab(tabs)
+        self._build_partner_tab(tabs)
         self._build_pet_tab(tabs)
         self._build_data_tab(tabs)
         self._build_settings_tab(tabs)
@@ -972,6 +976,126 @@ class Panel(QWidget):
             text = "\n".join(steps)
             QMetaObject.invokeMethod(self.overlay, "say", Qt.QueuedConnection,
                                      Q_ARG(str, text[:160]), Q_ARG(int, 9000))
+
+    # ================================================================ 物品搭配分析页
+
+    def _build_partner_tab(self, tabs):
+        w = QWidget()
+        v = QVBoxLayout(w)
+
+        g = QGroupBox("🔍 物品搭配分析（巴扎丘Bot 天梯统计）")
+        f = QFormLayout(g)
+        # 输入物品名（支持中文/英文）
+        self.edt_partner = QLineEdit()
+        self.edt_partner.setPlaceholderText("输入物品名，如：齿轮 / Cog / 悠悠球…")
+        self.edt_partner.returnPressed.connect(self._run_partner)
+        f.addRow("物品", self.edt_partner)
+        # 热门物品快捷标签
+        self.lbl_partner_hot = QLabel("热门：")
+        f.addRow(self.lbl_partner_hot)
+        h_btn = QHBoxLayout()
+        self.btn_partner = QPushButton("分析搭配")
+        self.btn_partner.clicked.connect(self._run_partner)
+        self.btn_partner.setMinimumHeight(30)
+        h_btn.addWidget(self.btn_partner)
+        h_btn.addStretch(1)
+        f.addRow(h_btn)
+        v.addWidget(g)
+
+        # 结果区
+        self.txt_partner = QTextEdit()
+        self.txt_partner.setReadOnly(True)
+        self.txt_partner.setMinimumHeight(320)
+        v.addWidget(self.txt_partner)
+        v.addStretch(1)
+        tabs.addTab(w, "搭配分析")
+        # 信号连接（后台线程 -> GUI 线程）
+        self.partner_result_ready.connect(self._show_partner_result)
+        self.partner_hot_ready.connect(self._set_partner_hot)
+        # 加载热门物品建议
+        self._load_partner_hot()
+
+    def _load_partner_hot(self):
+        """从 qiubot suggestions 拉取热门物品，作为快捷标签。"""
+        try:
+            import threading
+            def work():
+                try:
+                    data = datahub._qiubot_http_get(f"{datahub.QIUBOT_BASE}/api/suggestions")
+                    cards = [c["name"] for c in (data.get("cards") or [])][:8]
+                    self.partner_hot_ready.emit("、".join(cards))
+                except Exception:
+                    pass
+            threading.Thread(target=work, daemon=True).start()
+        except Exception:
+            pass
+
+    def _set_partner_hot(self, text):
+        try:
+            self.lbl_partner_hot.setText("热门：" + text)
+        except Exception:
+            pass
+
+    def _run_partner(self):
+        """执行物品搭配分析（后台线程，不阻塞界面）。"""
+        card = self.edt_partner.text().strip()
+        if not card:
+            self.txt_partner.setText("请输入物品名。")
+            return
+        self.txt_partner.setText("分析中…")
+        hero = self.cfg.get("hero", "mak")
+
+        import threading
+        def work():
+            try:
+                # 中文名 -> 英文名（qiubot 支持中文名，直接用）
+                data = datahub.qiubot_partner(card)
+                self.partner_result_ready.emit(self._partner_result_text(data, hero))
+            except Exception as e:
+                self.partner_result_ready.emit(f"分析失败：{e}")
+
+        threading.Thread(target=work, daemon=True).start()
+
+    def _show_partner_result(self, text):
+        self.txt_partner.setText(text)
+
+    def _partner_result_text(self, data: dict, hero: str) -> str:
+        """把 partner API 结果格式化为中文可读文本。"""
+        import json
+        if not isinstance(data, dict):
+            return "无数据。"
+        if data.get("_error"):
+            return data["_error"]
+        if data.get("not_found"):
+            return f"未找到物品「{data.get('card_name')}」的天梯数据，试试英文名（如 Cog / Yoyo）。"
+        card = data.get("card_name") or ""
+        total = data.get("target_total") or 0
+        lines = [f"📊 「{card}」 搭配分析（天梯 {total} 局）", ""]
+
+        by_appear = data.get("by_appear") or []
+        if by_appear:
+            lines.append("🤝 最常一同使用的卡（按出现率）：")
+            for i, it in enumerate(by_appear[:6]):
+                zh = it.get("name") or it.get("name_en") or ""
+                en = it.get("name_en") or ""
+                rate = (it.get("rate") or 0) * 100
+                appear = (it.get("appear_rate") or 0) * 100
+                lines.append(f"  {i+1}. {zh}（{en}） 同用率 {appear:.1f}% · 10胜率 {rate:.1f}%")
+            lines.append("")
+
+        by_win = data.get("by_winrate") or []
+        if by_win:
+            lines.append("🏆 一同使用 10 连胜概率最高的卡：")
+            for i, it in enumerate(by_win[:6]):
+                zh = it.get("name") or it.get("name_en") or ""
+                en = it.get("name_en") or ""
+                rate = (it.get("rate") or 0) * 100
+                ten = it.get("ten_win") or 0
+                ttl = it.get("total") or 0
+                lines.append(f"  {i+1}. {zh}（{en}） 10胜率 {rate:.1f}%（{ten}/{ttl}）")
+        if not lines[1:]:
+            lines.append("（该物品暂无搭配数据）")
+        return "\n".join(lines)
 
     # ================================================================ 桌宠页
 

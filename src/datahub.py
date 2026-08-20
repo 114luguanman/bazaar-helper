@@ -455,11 +455,10 @@ def fetch_qiubot_comp(hero: str, refresh: bool = False) -> dict:
 
 
 def qiubot_comp_to_builds(comp: dict, hero: str) -> list:
-    """把 qiubot comp 数据转成 build 格式（与 bazaar-builds 攻略统一）。
+    """把 qiubot comp 数据转成完整流派 build（推荐用）。
 
-    - 每个 layer（核心组合层）生成一个 build：items=核心卡
-    - 每个 l2_variants 的 configs（完整配置）生成 build：items=完整卡组
-    - score=出现率（10胜率参考），type=数据来源标注
+    只取 **完整配置层（configs，5-7 件完整卡组）**——它们是真正的"整个流派"。
+    核心组合/变体（2-4 件搭配）属于"物品搭配分析"，不参与流派推荐。
     """
     builds = []
     layers = comp.get("layers") or []
@@ -467,33 +466,9 @@ def qiubot_comp_to_builds(comp: dict, hero: str) -> list:
         core = [c.get("name_en") or c.get("name_zh") for c in (layer.get("core_cards") or []) if (c.get("name_en") or c.get("name_zh"))]
         if not core:
             continue
-        rate = layer.get("appearance_rate") or 0
-        title = f"[天梯] {'+'.join(core)}"
-        builds.append({
-            "hero": hero, "title": title, "date": "", "link": QIUBOT_BASE,
-            "slug": f"qiubot-{hero}-{li}", "score": f"出现率{rate*100:.1f}%",
-            "win": int(rate * 1000), "loss": max(1, int(1000 - rate * 1000)),
-            "author": "巴扎丘Bot", "type": "天梯组合", "types": ["天梯组合"],
-            "items": core, "excerpt": f"核心组合 {core}，占该英雄天梯对局 {rate*100:.1f}%",
-            "source": "qiubot", "appearance_rate": rate,
-        })
-        # 变体配置（完整卡组，可视为具体阵容）
         for vi, vart in enumerate(layer.get("l2_variants") or []):
             vcore = [c.get("name_en") or c.get("name_zh") for c in (vart.get("core_cards") or []) if (c.get("name_en") or c.get("name_zh"))]
-            vrate = vart.get("appearance_rate") or 0
             confs = vart.get("configs") or []
-            if vcore and vcore != core:
-                builds.append({
-                    "hero": hero,
-                    "title": f"[天梯] {'+'.join(vcore)}",
-                    "date": "", "link": QIUBOT_BASE,
-                    "slug": f"qiubot-{hero}-{li}-v{vi}",
-                    "score": f"出现率{vrate*100:.1f}%",
-                    "win": int(vrate * 1000), "loss": max(1, int(1000 - vrate * 1000)),
-                    "author": "巴扎丘Bot", "type": "天梯变体", "types": ["天梯变体"],
-                    "items": vcore, "excerpt": f"变体组合，出现率 {vrate*100:.1f}%",
-                    "source": "qiubot", "appearance_rate": vrate,
-                })
             for ci, cfg in enumerate(confs):
                 cards = [c.get("name_en") or c.get("name_zh") for c in (cfg.get("cards") or []) if (c.get("name_en") or c.get("name_zh"))]
                 if not cards:
@@ -502,16 +477,49 @@ def qiubot_comp_to_builds(comp: dict, hero: str) -> list:
                 base_name = "+".join(vcore) if vcore else "+".join(core)
                 builds.append({
                     "hero": hero,
-                    "title": f"[天梯] {base_name}·配置{ci+1}",
+                    "title": f"[天梯] {base_name}·完整阵容",
                     "date": "", "link": QIUBOT_BASE,
                     "slug": f"qiubot-{hero}-{li}-v{vi}-c{ci}",
                     "score": f"出现率{crate*100:.2f}%",
                     "win": int(crate * 10000), "loss": max(1, int(10000 - crate * 10000)),
-                    "author": "巴扎丘Bot", "type": "天梯配置", "types": ["天梯配置"],
-                    "items": cards, "excerpt": f"完整配置，出现率 {crate*100:.2f}%",
+                    "author": "巴扎丘Bot", "type": "天梯流派", "types": ["天梯流派"],
+                    "items": cards, "excerpt": f"完整阵容，出现率 {crate*100:.2f}%",
                     "source": "qiubot", "appearance_rate": crate,
+                    "core_cards": core,  # 保留核心组合信息供展示
                 })
     return builds
+
+
+def qiubot_core_comps(hero: str) -> list:
+    """qiubot 核心组合层（物品搭配分析用）：[{core, rate, count, variants}]。"""
+    comp = fetch_qiubot_comp(hero)
+    out = []
+    for layer in comp.get("layers") or []:
+        core = [c.get("name_zh") or c.get("name_en") for c in (layer.get("core_cards") or []) if (c.get("name_zh") or c.get("name_en"))]
+        if not core:
+            continue
+        out.append({
+            "core": core,
+            "rate": layer.get("appearance_rate") or 0,
+            "count": layer.get("count") or 0,
+            "variants": len(layer.get("l2_variants") or []),
+        })
+    return out
+
+
+def qiubot_partner(card_name: str, days: str = "") -> dict:
+    """巴扎丘Bot 物品搭配查询：某物品最常一同使用的卡 + 10连胜概率。
+
+    返回 {card_name, target_total, by_appear: [...], by_winrate: [...]}。
+    """
+    import urllib.parse
+    url = f"{QIUBOT_BASE}/api/partner?card=" + urllib.parse.quote(card_name)
+    if days:
+        url += "&days=" + urllib.parse.quote(days)
+    try:
+        return _qiubot_http_get(url)
+    except FetchError:
+        return {"_error": "搭配查询失败"}
 
 
 def qiubot_builds(hero: str, refresh: bool = False) -> list:
