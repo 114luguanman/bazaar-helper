@@ -22,6 +22,12 @@ import sys
 import urllib.request
 import urllib.error
 
+# Windows 控制台 GBK 编码不支持 emoji，统一 UTF-8 输出
+if getattr(sys.stdout, "encoding", "") and sys.stdout.encoding.lower().startswith("gb"):
+    import io
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding="utf-8", errors="replace")
+
 REPO_NAME = "bazaar-helper"           # 仓库名（可改）
 REPO_DESC = "《大巴扎》(The Bazaar) 萌新辅助工具：日志驱动物品识别 + 多源流派推荐 + DeepSeek娘桌宠"
 PRIVATE = False                        # True=私有仓库，False=公开
