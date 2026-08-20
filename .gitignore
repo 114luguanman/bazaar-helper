@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# 虚拟环境与依赖（便携模式）
+vendor/
+.venv/
+venv/
+
+# 本地运行缓存（可重新生成/下载，不入库）
+data/config.json
+data/qiubot_comp.json
+data/bpp_enchant_cache.json
+data/GameData.db
+data/gamedata_cards.json
+data/card_features_*.npz
+data/board_images/
+diagnose/
+
+# 用户个人桌宠素材（不入库）
+assets/pet/input/蓝色大肥鱼.jpg
+assets/pet/anims/蓝色大肥鱼/
+assets/pet/icons/蓝色大肥鱼.png
+/蓝色大肥鱼.jpg
+
+# 研究脚本与临时文件（个人调试脚本，不入库）
+research/
+
+# 物品图标模板（874 个 PNG，约 30MB，运行时增强项；识别主要靠日志+YOLO）
+templates/items/
+templates/.gitkeep

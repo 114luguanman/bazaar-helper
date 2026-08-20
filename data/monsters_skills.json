@@ -1,0 +1,1037 @@
+[
+ {
+  "name_cn": "觉醒街区",
+  "name_en": "Awakened District",
+  "level": 15,
+  "tier": "Legendary / 传奇",
+  "skills": [
+   {
+    "id": "3c42764f-2a89-4fa2-b901-ca2ec127c411",
+    "name_cn": "繁荣昌盛",
+    "name_en": "Prosperity",
+    "desc": "",
+    "tier": "Diamond / 钻石"
+   }
+  ]
+ },
+ {
+  "name_cn": "血礁船长",
+  "name_en": "Bloodreef Captain",
+  "level": 10,
+  "tier": "Bronze / 青铜",
+  "skills": [
+   {
+    "id": "3849770c-59df-4471-b0b0-f02713be8bb0",
+    "name_cn": "全副武装",
+    "name_en": "Full Arsenal",
+    "desc": "",
+    "tier": "Gold / 黄金"
+   }
+  ]
+ },
+ {
+  "name_cn": "血礁船长",
+  "name_en": "Bloodreef Captain",
+  "level": 10,
+  "tier": "Silver / 白银",
+  "skills": [
+   {
+    "id": "3849770c-59df-4471-b0b0-f02713be8bb0",
+    "name_cn": "全副武装",
+    "name_en": "Full Arsenal",
+    "desc": "",
+    "tier": "Gold / 黄金"
+   }
+  ]
+ },
+ {
+  "name_cn": "血礁奇兵",
+  "name_en": "Bloodreef Raider",
+  "level": 5,
+  "tier": "Silver / 白银",
+  "skills": [
+   {
+    "id": "52f43602-8404-4a38-9d16-b1845489851c",
+    "name_cn": "弹药储存箱",
+    "name_en": "Ammo Stash",
+    "desc": "",
+    "tier": "Silver / 白银"
+   }
+  ]
+ },
+ {
+  "name_cn": "血礁奇兵",
+  "name_en": "Bloodreef Raider",
+  "level": 5,
+  "tier": "Bronze / 青铜",
+  "skills": [
+   {
+    "id": "52f43602-8404-4a38-9d16-b1845489851c",
+    "name_cn": "弹药储存箱",
+    "name_en": "Ammo Stash",
+    "desc": "",
+    "tier": "Silver / 白银"
+   }
+  ]
+ },
+ {
+  "name_cn": "锅炉斗士",
+  "name_en": "Boilerroom Brawler",
+  "level": 4,
+  "tier": "Bronze / 青铜",
+  "skills": [
+   {
+    "id": "b76a00ad-8034-4ad8-9f55-9fdc279cf60e",
+    "name_cn": "修理时间",
+    "name_en": "Time to Tinker",
+    "desc": "",
+    "tier": "Bronze / 青铜"
+   }
+  ]
+ },
+ {
+  "name_cn": "哈洛老大",
+  "name_en": "Boss Harrow",
+  "level": 10,
+  "tier": "Bronze / 青铜",
+  "skills": [
+   {
+    "id": "08adc2fd-986c-4e8f-914e-fda9703ace3d",
+    "name_cn": "突击专注",
+    "name_en": "Assault Focus",
+    "desc": "",
+    "tier": "Bronze / 青铜"
+   }
+  ]
+ },
+ {
+  "name_cn": "赏金猎人",
+  "name_en": "Bounty Hunter",
+  "level": 9,
+  "tier": "Diamond / 钻石",
+  "skills": [
+   {
+    "id": "dfe40f90-61de-46dc-b807-0da587140e9d",
+    "name_cn": "伏击",
+    "name_en": "Ambush",
+    "desc": "",
+    "tier": "Diamond / 钻石"
+   }
+  ]
+ },
+ {
+  "name_cn": "云顶军官",
+  "name_en": "Cloudtop Officer",
+  "level": 8,
+  "tier": "Bronze / 青铜",
+  "skills": [
+   {
+    "id": "6e95c90d-e4b4-42c3-b5e9-3c390d762c92",
+    "name_cn": "盾击",
+    "name_en": "Shield Bash",
+    "desc": "",
+    "tier": "Bronze / 青铜"
+   }
+  ]
+ },
+ {
+  "name_cn": "椰子蟹",
+  "name_en": "Coconut Crab",
+  "level": 2,
+  "tier": "Bronze / 青铜",
+  "skills": [
+   {
+    "id": "050ff26a-59ec-4666-89b0-b0630a75149a",
+    "name_cn": "硬壳",
+    "name_en": "Hard Shell",
+    "desc": "",
+    "tier": "Bronze / 青铜"
+   }
+  ]
+ },
+ {
+  "name_cn": "宇宙鹏鸟",
+  "name_en": "Cosmic Roc",
+  "level": 8,
+  "tier": "Bronze / 青铜",
+  "skills": [
+   {
+    "id": "870ed8e7-9c1f-4be0-b84c-00ebcf475a74",
+    "name_cn": "宇宙风",
+    "name_en": "Cosmic Wind",
+    "desc": "",
+    "tier": "Gold / 黄金"
+   }
+  ]
+ },
+ {
+  "name_cn": "宇宙鹏鸟",
+  "name_en": "Cosmic Roc",
+  "level": 8,
+  "tier": "Silver / 白银",
+  "skills": [
+   {
+    "id": "870ed8e7-9c1f-4be0-b84c-00ebcf475a74",
+    "name_cn": "宇宙风",
+    "name_en": "Cosmic Wind",
+    "desc": "",
+    "tier": "Gold / 黄金"
+   }
+  ]
+ },
+ {
+  "name_cn": "贪婪窃贼",
+  "name_en": "Covetous Thief",
+  "level": 3,
+  "tier": "Bronze / 青铜",
+  "skills": [
+   {
+    "id": "c5936035-d32a-4d82-8dfc-44deb993b5ea",
+    "name_cn": "扒手",
+    "name_en": "Pickpocket",
+    "desc": "",
+    "tier": "Bronze / 青铜"
+   }
+  ]
+ },
+ {
+  "name_cn": "贪婪窃贼",
+  "name_en": "Covetous Thief",
+  "level": 3,
+  "tier": "Silver / 白银",
+  "skills": [
+   {
+    "id": "c5936035-d32a-4d82-8dfc-44deb993b5ea",
+    "name_cn": "扒手",
+    "name_en": "Pickpocket",
+    "desc": "",
+    "tier": "Bronze / 青铜"
+   }
+  ]
+ },
+ {
+  "name_cn": "初学学徒",
+  "name_en": "Dabbling Apprentice",
+  "level": 3,
+  "tier": "Bronze / 青铜",
+  "skills": [
+   {
+    "id": "eea71cd9-2688-4c4d-99e7-6eee44cf47a2",
+    "name_cn": "恐慌",
+    "name_en": "Panic",
+    "desc": "",
+    "tier": "Bronze / 青铜"
+   }
+  ]
+ },
+ {
+  "name_cn": "英格恐狼",
+  "name_en": "Dire Inglet",
+  "level": 6,
+  "tier": "Bronze / 青铜",
+  "skills": [
+   {
+    "id": "756024f8-ad19-4f9b-a3c1-3a93c285b5d1",
+    "name_cn": "好战",
+    "name_en": "Aggressive",
+    "desc": "",
+    "tier": "Bronze / 青铜"
+   }
+  ]
+ },
+ {
+  "name_cn": "恶蚊",
+  "name_en": "Dire Mosquito",
+  "level": 6,
+  "tier": "Bronze / 青铜",
+  "skills": [
+   {
+    "id": "b7938579-8bc3-4bbf-b002-ffa1870acd50",
+    "name_cn": "麻痹突袭",
+    "name_en": "Paralyzing Rush",
+    "desc": "",
+    "tier": "Bronze / 青铜"
+   }
+  ]
+ },
+ {
+  "name_cn": "巨龙",
+  "name_en": "Dragon",
+  "level": 13,
+  "tier": "Legendary / 传奇",
+  "skills": [
+   {
+    "id": "72010bea-fadf-4f64-9cba-d34bfd014388",
+    "name_cn": "龙性狂焰",
+    "name_en": "Draconic Rage",
+    "desc": "",
+    "tier": "Diamond / 钻石"
+   }
+  ]
+ },
+ {
+  "name_cn": "怪奇以太匠",
+  "name_en": "Eccentric Etherwright",
+  "level": 5,
+  "tier": "Gold / 黄金",
+  "skills": [
+   {
+    "id": "51cec489-1988-48ff-95af-0235b374803e",
+    "name_cn": "暗做手脚",
+    "name_en": "Rigged",
+    "desc": "",
+    "tier": "Bronze / 青铜"
+   }
+  ]
+ },
+ {
+  "name_cn": "怪奇以太匠",
+  "name_en": "Eccentric Etherwright",
+  "level": 5,
+  "tier": "Silver / 白银",
+  "skills": [
+   {
+    "id": "51cec489-1988-48ff-95af-0235b374803e",
+    "name_cn": "暗做手脚",
+    "name_en": "Rigged",
+    "desc": "",
+    "tier": "Bronze / 青铜"
+   }
+  ]
+ },
+ {
+  "name_cn": "精英决斗者",
+  "name_en": "Elite Duelist",
+  "level": 9,
+  "tier": "Bronze / 青铜",
+  "skills": [
+   {
+    "id": "035a7356-9021-4ba9-8c87-6a88181660ea",
+    "name_cn": "虚荣",
+    "name_en": "Big Ego",
+    "desc": "",
+    "tier": "Bronze / 青铜"
+   }
+  ]
+ },
+ {
+  "name_cn": "獠牙英格狼",
+  "name_en": "Fanged Inglet",
+  "level": 1,
+  "tier": "Bronze / 青铜",
+  "skills": [
+   {
+    "id": "fb4a4bf9-581c-4e36-aed7-b77ec7e515bb",
+    "name_cn": "Wild Strength",
+    "name_en": "Wild Strength",
+    "desc": "",
+    "tier": "Bronze / 青铜"
+   }
+  ]
+ },
+ {
+  "name_cn": "菲罗斯汗",
+  "name_en": "Ferros Khan",
+  "level": 10,
+  "tier": "Silver / 白银",
+  "skills": [
+   {
+    "id": "f9628cc5-fdf8-49cf-8807-d7b85f457aa8",
+    "name_cn": "一发入魂",
+    "name_en": "One Shot, One Kill",
+    "desc": "",
+    "tier": "Bronze / 青铜"
+   }
+  ]
+ },
+ {
+  "name_cn": "菲罗斯汗",
+  "name_en": "Ferros Khan",
+  "level": 10,
+  "tier": "Bronze / 青铜",
+  "skills": [
+   {
+    "id": "f9628cc5-fdf8-49cf-8807-d7b85f457aa8",
+    "name_cn": "一发入魂",
+    "name_en": "One Shot, One Kill",
+    "desc": "",
+    "tier": "Bronze / 青铜"
+   }
+  ]
+ },
+ {
+  "name_cn": "舞火大师",
+  "name_en": "Flame Juggler",
+  "level": 6,
+  "tier": "Gold / 黄金",
+  "skills": [
+   {
+    "id": "ee178ba8-666d-426f-8499-1bd611a91802",
+    "name_cn": "烈焰爆发",
+    "name_en": "Burst of Flame",
+    "desc": "",
+    "tier": "Bronze / 青铜"
+   }
+  ]
+ },
+ {
+  "name_cn": "舞火大师",
+  "name_en": "Flame Juggler",
+  "level": 6,
+  "tier": "Silver / 白银",
+  "skills": [
+   {
+    "id": "ee178ba8-666d-426f-8499-1bd611a91802",
+    "name_cn": "烈焰爆发",
+    "name_en": "Burst of Flame",
+    "desc": "",
+    "tier": "Bronze / 青铜"
+   }
+  ]
+ },
+ {
+  "name_cn": "霜猴勇士",
+  "name_en": "Frost Street Challenger",
+  "level": 4,
+  "tier": "Bronze / 青铜",
+  "skills": [
+   {
+    "id": "e7cc942b-96c5-4b90-a916-b3db0ee4bfe7",
+    "name_cn": "雪暴",
+    "name_en": "Snowstorm",
+    "desc": "",
+    "tier": "Bronze / 青铜"
+   }
+  ]
+ },
+ {
+  "name_cn": "霜猴勇士",
+  "name_en": "Frost Street Challenger",
+  "level": 4,
+  "tier": "Silver / 白银",
+  "skills": [
+   {
+    "id": "e7cc942b-96c5-4b90-a916-b3db0ee4bfe7",
+    "name_cn": "雪暴",
+    "name_en": "Snowstorm",
+    "desc": "",
+    "tier": "Bronze / 青铜"
+   }
+  ]
+ },
+ {
+  "name_cn": "霜猴霸王",
+  "name_en": "Frost Street Champion",
+  "level": 12,
+  "tier": "Gold / 黄金",
+  "skills": [
+   {
+    "id": "b2e947ce-a8d9-46e0-8249-22a6a97fbffc",
+    "name_cn": "暴雪",
+    "name_en": "Blizzard",
+    "desc": "",
+    "tier": "Bronze / 青铜"
+   }
+  ]
+ },
+ {
+  "name_cn": "巨蚊",
+  "name_en": "Giant Mosquito",
+  "level": 2,
+  "tier": "Bronze / 青铜",
+  "skills": [
+   {
+    "id": "d5b180a2-9dfa-43e3-bfb9-3e15dac0398e",
+    "name_cn": "疾速",
+    "name_en": "Rush",
+    "desc": "",
+    "tier": "Bronze / 青铜"
+   }
+  ]
+ },
+ {
+  "name_cn": "戈尔贡贵妇",
+  "name_en": "Gorgon Noble",
+  "level": 7,
+  "tier": "Gold / 黄金",
+  "skills": [
+   {
+    "id": "b21d98f7-d677-4598-8b53-5bfd8301d26a",
+    "name_cn": "石化凝视",
+    "name_en": "Petrifying Gaze",
+    "desc": "",
+    "tier": "Bronze / 青铜"
+   }
+  ]
+ },
+ {
+  "name_cn": "戈尔贡贵妇",
+  "name_en": "Gorgon Noble",
+  "level": 7,
+  "tier": "Silver / 白银",
+  "skills": [
+   {
+    "id": "b21d98f7-d677-4598-8b53-5bfd8301d26a",
+    "name_cn": "石化凝视",
+    "name_en": "Petrifying Gaze",
+    "desc": "",
+    "tier": "Bronze / 青铜"
+   }
+  ]
+ },
+ {
+  "name_cn": "庞大实验体",
+  "name_en": "Hulking Experiment",
+  "level": 10,
+  "tier": "Bronze / 青铜",
+  "skills": [
+   {
+    "id": "53aa52ea-b2b7-4b8a-8109-4f67fb4a3e29",
+    "name_cn": "自适应军备",
+    "name_en": "Adaptive Ordinance",
+    "desc": "",
+    "tier": "Gold / 黄金"
+   }
+  ]
+ },
+ {
+  "name_cn": "地狱大魔神",
+  "name_en": "Infernal",
+  "level": 9,
+  "tier": "Gold / 黄金",
+  "skills": [
+   {
+    "id": "9dacb0ad-a016-40ff-a54a-24d807c0988f",
+    "name_cn": "复仇",
+    "name_en": "Vengeance",
+    "desc": "",
+    "tier": "Bronze / 青铜"
+   }
+  ]
+ },
+ {
+  "name_cn": "地狱大魔神",
+  "name_en": "Infernal",
+  "level": 9,
+  "tier": "Diamond / 钻石",
+  "skills": [
+   {
+    "id": "9dacb0ad-a016-40ff-a54a-24d807c0988f",
+    "name_cn": "复仇",
+    "name_en": "Vengeance",
+    "desc": "",
+    "tier": "Bronze / 青铜"
+   }
+  ]
+ },
+ {
+  "name_cn": "地狱使者",
+  "name_en": "Infernal Envoy",
+  "level": 6,
+  "tier": "Silver / 白银",
+  "skills": [
+   {
+    "id": "d675442d-7d59-4f13-9209-6e1a4ae7a1fc",
+    "name_cn": "灼烧狂怒",
+    "name_en": "Burning Rage",
+    "desc": "",
+    "tier": "Bronze / 青铜"
+   }
+  ]
+ },
+ {
+  "name_cn": "地狱使者",
+  "name_en": "Infernal Envoy",
+  "level": 6,
+  "tier": "Bronze / 青铜",
+  "skills": [
+   {
+    "id": "d675442d-7d59-4f13-9209-6e1a4ae7a1fc",
+    "name_cn": "灼烧狂怒",
+    "name_en": "Burning Rage",
+    "desc": "",
+    "tier": "Bronze / 青铜"
+   }
+  ]
+ },
+ {
+  "name_cn": "地狱飞艇",
+  "name_en": "Infernal Frigate",
+  "level": 9,
+  "tier": "Silver / 白银",
+  "skills": [
+   {
+    "id": "ffceb0c7-7913-4339-8013-f1bcc67cca9c",
+    "name_cn": "引火者",
+    "name_en": "Firestarter",
+    "desc": "",
+    "tier": "Bronze / 青铜"
+   }
+  ]
+ },
+ {
+  "name_cn": "地狱飞艇",
+  "name_en": "Infernal Frigate",
+  "level": 9,
+  "tier": "Bronze / 青铜",
+  "skills": [
+   {
+    "id": "ffceb0c7-7913-4339-8013-f1bcc67cca9c",
+    "name_cn": "引火者",
+    "name_en": "Firestarter",
+    "desc": "",
+    "tier": "Bronze / 青铜"
+   }
+  ]
+ },
+ {
+  "name_cn": "快乐杰克南瓜",
+  "name_en": "Joyful Jack",
+  "level": 8,
+  "tier": "Bronze / 青铜",
+  "skills": [
+   {
+    "id": "dd9d1ad7-8c28-46da-9f98-aaa2cc55cd00",
+    "name_cn": "等价交换",
+    "name_en": "Equivalent Exchange",
+    "desc": "",
+    "tier": "Bronze / 青铜"
+   }
+  ]
+ },
+ {
+  "name_cn": "快乐杰克南瓜",
+  "name_en": "Joyful Jack",
+  "level": 8,
+  "tier": "Silver / 白银",
+  "skills": [
+   {
+    "id": "dd9d1ad7-8c28-46da-9f98-aaa2cc55cd00",
+    "name_cn": "等价交换",
+    "name_en": "Equivalent Exchange",
+    "desc": "",
+    "tier": "Bronze / 青铜"
+   }
+  ]
+ },
+ {
+  "name_cn": "凯沃斯雄蜂",
+  "name_en": "Kyver Drone",
+  "level": 1,
+  "tier": "Bronze / 青铜",
+  "skills": [
+   {
+    "id": "0526054f-98da-4e95-be68-d25b26bb0fe3",
+    "name_cn": "受训",
+    "name_en": "Trained",
+    "desc": "",
+    "tier": "Bronze / 青铜"
+   }
+  ]
+ },
+ {
+  "name_cn": "放贷鲨",
+  "name_en": "Loan Shark",
+  "level": 8,
+  "tier": "Gold / 黄金",
+  "skills": [
+   {
+    "id": "09c4c894-0397-47e5-9635-7b1f4c49527a",
+    "name_cn": "权力掮客",
+    "name_en": "Power Broker",
+    "desc": "",
+    "tier": "Silver / 白银"
+   }
+  ]
+ },
+ {
+  "name_cn": "阿肯领主",
+  "name_en": "Lord Arken",
+  "level": 15,
+  "tier": "Legendary / 传奇",
+  "skills": [
+   {
+    "id": "56450d16-bc69-43fd-bb89-4aff071cda29",
+    "name_cn": "坚定不移",
+    "name_en": "Unwavering",
+    "desc": "",
+    "tier": "Gold / 黄金"
+   }
+  ]
+ },
+ {
+  "name_cn": "废土领主",
+  "name_en": "Lord of the Wastes",
+  "level": 13,
+  "tier": "Diamond / 钻石",
+  "skills": [
+   {
+    "id": "c9c884fd-849e-4541-b770-4658c2e6e609",
+    "name_cn": "凶风",
+    "name_en": "Foreboding Winds",
+    "desc": "",
+    "tier": "Gold / 黄金"
+   }
+  ]
+ },
+ {
+  "name_cn": "炼金大师",
+  "name_en": "Master Alchemist",
+  "level": 10,
+  "tier": "Bronze / 青铜",
+  "skills": [
+   {
+    "id": "fb409226-bf38-4275-b775-7fab879a1d6f",
+    "name_cn": "上膛工具",
+    "name_en": "Retool",
+    "desc": "",
+    "tier": "Gold / 黄金"
+   }
+  ]
+ },
+ {
+  "name_cn": "黑牛先生",
+  "name_en": "Mr. Moo",
+  "level": 10,
+  "tier": "Diamond / 钻石",
+  "skills": [
+   {
+    "id": "4a443bdd-f949-4fb5-9ccd-a710f74d2311",
+    "name_cn": "Passive Aggressive",
+    "name_en": "Passive Aggressive",
+    "desc": "",
+    "tier": "Gold / 黄金"
+   }
+  ]
+ },
+ {
+  "name_cn": "绿洲守护神",
+  "name_en": "Oasis Guardian",
+  "level": 9,
+  "tier": "Bronze / 青铜",
+  "skills": [
+   {
+    "id": "a59bc243-7c8b-447a-8ab7-968f662b1c50",
+    "name_cn": "无尽水源",
+    "name_en": "Waters of Infinity",
+    "desc": "",
+    "tier": "Bronze / 青铜"
+   }
+  ]
+ },
+ {
+  "name_cn": "绿洲守护神",
+  "name_en": "Oasis Guardian",
+  "level": 9,
+  "tier": "Silver / 白银",
+  "skills": [
+   {
+    "id": "a59bc243-7c8b-447a-8ab7-968f662b1c50",
+    "name_cn": "无尽水源",
+    "name_en": "Waters of Infinity",
+    "desc": "",
+    "tier": "Bronze / 青铜"
+   }
+  ]
+ },
+ {
+  "name_cn": "荒原旋舞者",
+  "name_en": "Outlands Dervish",
+  "level": 4,
+  "tier": "Bronze / 青铜",
+  "skills": [
+   {
+    "id": "4fecb60e-f797-4628-950a-aee298c0b02b",
+    "name_cn": "Quickening Winds",
+    "name_en": "Quickening Winds",
+    "desc": "",
+    "tier": "Bronze / 青铜"
+   }
+  ]
+ },
+ {
+  "name_cn": "精致决斗士",
+  "name_en": "Preening Duelist",
+  "level": 5,
+  "tier": "Bronze / 青铜",
+  "skills": [
+   {
+    "id": "64727f7e-adfd-4f25-aa4e-1f127b9d5b70",
+    "name_cn": "光说不练",
+    "name_en": "All Talk",
+    "desc": "",
+    "tier": "Bronze / 青铜"
+   }
+  ]
+ },
+ {
+  "name_cn": "辉耀海盗",
+  "name_en": "Radiant Corsair",
+  "level": 12,
+  "tier": "Legendary / 传奇",
+  "skills": [
+   {
+    "id": "09c59ebf-d2f9-4862-9c30-396b9ddfdd89",
+    "name_cn": "炽焰重生",
+    "name_en": "Fiery Rebirth",
+    "desc": "",
+    "tier": "Bronze / 青铜"
+   }
+  ]
+ },
+ {
+  "name_cn": "流浪岛屿",
+  "name_en": "Roaming Isle",
+  "level": 11,
+  "tier": "Gold / 黄金",
+  "skills": [
+   {
+    "id": "7b6a982f-7196-4d3e-8674-825fddba80d2",
+    "name_cn": "防线强化",
+    "name_en": "Shored Up",
+    "desc": "",
+    "tier": "Bronze / 青铜"
+   }
+  ]
+ },
+ {
+  "name_cn": "暴走破碎机",
+  "name_en": "Rogue Scrapper",
+  "level": 4,
+  "tier": "Silver / 白银",
+  "skills": [
+   {
+    "id": "aa603f52-3788-40c2-bb99-53e92a69b3f5",
+    "name_cn": "铁锈",
+    "name_en": "Rust",
+    "desc": "",
+    "tier": "Bronze / 青铜"
+   }
+  ]
+ },
+ {
+  "name_cn": "暴走破碎机",
+  "name_en": "Rogue Scrapper",
+  "level": 4,
+  "tier": "Gold / 黄金",
+  "skills": [
+   {
+    "id": "aa603f52-3788-40c2-bb99-53e92a69b3f5",
+    "name_cn": "铁锈",
+    "name_en": "Rust",
+    "desc": "",
+    "tier": "Bronze / 青铜"
+   }
+  ]
+ },
+ {
+  "name_cn": "剑齿虎",
+  "name_en": "Sabretooth",
+  "level": 5,
+  "tier": "Bronze / 青铜",
+  "skills": [
+   {
+    "id": "20db8a31-f74d-40d2-a5a5-db28e3261bea",
+    "name_cn": "钻石獠牙",
+    "name_en": "Diamond Fangs",
+    "desc": "",
+    "tier": "Gold / 黄金"
+   }
+  ]
+ },
+ {
+  "name_cn": "Tempest Flamedancer",
+  "name_en": "Tempest Flamedancer",
+  "level": 3,
+  "tier": "Bronze / 青铜",
+  "skills": [
+   {
+    "id": "19b74e9a-6723-4e94-a955-2c39ca48dbd0",
+    "name_cn": "烈焰舞者",
+    "name_en": "Flamedancer",
+    "desc": "",
+    "tier": "Bronze / 青铜"
+   }
+  ]
+ },
+ {
+  "name_cn": "暴徒",
+  "name_en": "Thug",
+  "level": 8,
+  "tier": "Silver / 白银",
+  "skills": [
+   {
+    "id": "e8770458-220a-45bd-bfef-d6045b152d29",
+    "name_cn": "迎头痛击",
+    "name_en": "Bonk",
+    "desc": "",
+    "tier": "Gold / 黄金"
+   }
+  ]
+ },
+ {
+  "name_cn": "垃圾魔像",
+  "name_en": "Trash Golem",
+  "level": 7,
+  "tier": "Silver / 白银",
+  "skills": [
+   {
+    "id": "03968f2d-5f40-464a-bf1f-9475836157cd",
+    "name_cn": "临修工匠",
+    "name_en": "Jury Rigger",
+    "desc": "",
+    "tier": "Bronze / 青铜"
+   }
+  ]
+ },
+ {
+  "name_cn": "垃圾魔像",
+  "name_en": "Trash Golem",
+  "level": 7,
+  "tier": "Bronze / 青铜",
+  "skills": [
+   {
+    "id": "03968f2d-5f40-464a-bf1f-9475836157cd",
+    "name_cn": "临修工匠",
+    "name_en": "Jury Rigger",
+    "desc": "",
+    "tier": "Bronze / 青铜"
+   }
+  ]
+ },
+ {
+  "name_cn": "垃圾泰坦",
+  "name_en": "Trash Titan",
+  "level": 11,
+  "tier": "Silver / 白银",
+  "skills": [
+   {
+    "id": "d071e4de-f87f-41b5-b02d-d622e35c0b4d",
+    "name_cn": "杂耍",
+    "name_en": "Juggler",
+    "desc": "",
+    "tier": "Gold / 黄金"
+   }
+  ]
+ },
+ {
+  "name_cn": "载宝海龟",
+  "name_en": "Treasure Turtle",
+  "level": 9,
+  "tier": "Gold / 黄金",
+  "skills": [
+   {
+    "id": "369a6704-2727-4cea-be27-01b76c82df45",
+    "name_cn": "暂避风头",
+    "name_en": "Hunker Down",
+    "desc": "",
+    "tier": "Gold / 黄金"
+   }
+  ]
+ },
+ {
+  "name_cn": "载宝海龟",
+  "name_en": "Treasure Turtle",
+  "level": 9,
+  "tier": "Silver / 白银",
+  "skills": [
+   {
+    "id": "369a6704-2727-4cea-be27-01b76c82df45",
+    "name_cn": "暂避风头",
+    "name_en": "Hunker Down",
+    "desc": "",
+    "tier": "Gold / 黄金"
+   }
+  ]
+ },
+ {
+  "name_cn": "Veteran Octopus",
+  "name_en": "Veteran Octopus",
+  "level": 13,
+  "tier": "Legendary / 传奇",
+  "skills": [
+   {
+    "id": "1c4c5aaa-6aa2-4329-a55a-ac75e987ee95",
+    "name_cn": "军备竞赛",
+    "name_en": "Arms Race",
+    "desc": "",
+    "tier": "Bronze / 青铜"
+   }
+  ]
+ },
+ {
+  "name_cn": "毒蛇",
+  "name_en": "Viper",
+  "level": 1,
+  "tier": "Bronze / 青铜",
+  "skills": [
+   {
+    "id": "239aeabb-0b0c-484d-a761-ee68ede3223c",
+    "name_cn": "狂怒一击",
+    "name_en": "Lash Out",
+    "desc": "",
+    "tier": "Bronze / 青铜"
+   }
+  ]
+ },
+ {
+  "name_cn": "毒蛇暴君",
+  "name_en": "Viper Tyrant",
+  "level": 7,
+  "tier": "Bronze / 青铜",
+  "skills": [
+   {
+    "id": "b89ebdeb-1954-47c8-97fe-8cc3008f2a25",
+    "name_cn": "Revitalizing Toxins",
+    "name_en": "Revitalizing Toxins",
+    "desc": "",
+    "tier": "Bronze / 青铜"
+   }
+  ]
+ },
+ {
+  "name_cn": "沃卡斯打手",
+  "name_en": "Volkas Enforcer",
+  "level": 12,
+  "tier": "Gold / 黄金",
+  "skills": [
+   {
+    "id": "e2b02661-62c8-42da-be35-3b15eebdb31d",
+    "name_cn": "霜寒专精",
+    "name_en": "Cryomastery",
+    "desc": "",
+    "tier": "Bronze / 青铜"
+   }
+  ]
+ },
+ {
+  "name_cn": "流浪暗礁",
+  "name_en": "Wandering Shoal",
+  "level": 10,
+  "tier": "Silver / 白银",
+  "skills": [
+   {
+    "id": "7ab9d9a7-09b2-4dab-b821-eaaf0fb84523",
+    "name_cn": "厚皮",
+    "name_en": "Thick Hide",
+    "desc": "",
+    "tier": "Bronze / 青铜"
+   }
+  ]
+ },
+ {
+  "name_cn": "流浪暗礁",
+  "name_en": "Wandering Shoal",
+  "level": 10,
+  "tier": "Gold / 黄金",
+  "skills": [
+   {
+    "id": "7ab9d9a7-09b2-4dab-b821-eaaf0fb84523",
+    "name_cn": "厚皮",
+    "name_en": "Thick Hide",
+    "desc": "",
+    "tier": "Bronze / 青铜"
+   }
+  ]
+ }
+]

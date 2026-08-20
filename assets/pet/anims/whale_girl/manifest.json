@@ -1,0 +1,109 @@
+{
+  "id": "whale_girl",
+  "name": "DeepSeek鲸鱼娘",
+  "source": "whale_girl.png",
+  "canvas": 288,
+  "fps": 15,
+  "anims": {
+    "idle": {
+      "file": "idle.gif",
+      "frames": [
+        "idle_000.png",
+        "idle_001.png",
+        "idle_002.png",
+        "idle_003.png",
+        "idle_004.png",
+        "idle_005.png",
+        "idle_006.png",
+        "idle_007.png",
+        "idle_008.png",
+        "idle_009.png",
+        "idle_010.png",
+        "idle_011.png",
+        "idle_012.png",
+        "idle_013.png",
+        "idle_014.png",
+        "idle_015.png",
+        "idle_016.png",
+        "idle_017.png",
+        "idle_018.png",
+        "idle_019.png",
+        "idle_020.png",
+        "idle_021.png",
+        "idle_022.png",
+        "idle_023.png",
+        "idle_024.png",
+        "idle_025.png",
+        "idle_026.png",
+        "idle_027.png",
+        "idle_028.png",
+        "idle_029.png",
+        "idle_030.png",
+        "idle_031.png",
+        "idle_032.png",
+        "idle_033.png",
+        "idle_034.png",
+        "idle_035.png",
+        "idle_036.png",
+        "idle_037.png",
+        "idle_038.png",
+        "idle_039.png"
+      ],
+      "frame_ms": 65,
+      "count": 40,
+      "duration_ms": 2600
+    },
+    "startup": {
+      "file": "startup.gif",
+      "frames": [
+        "startup_000.png",
+        "startup_001.png",
+        "startup_002.png",
+        "startup_003.png",
+        "startup_004.png",
+        "startup_005.png",
+        "startup_006.png",
+        "startup_007.png"
+      ],
+      "frame_ms": 60,
+      "count": 8,
+      "duration_ms": 480
+    },
+    "advice": {
+      "file": "advice.gif",
+      "frames": [
+        "advice_000.png",
+        "advice_001.png",
+        "advice_002.png",
+        "advice_003.png",
+        "advice_004.png",
+        "advice_005.png",
+        "advice_006.png",
+        "advice_007.png",
+        "advice_008.png",
+        "advice_009.png",
+        "advice_010.png",
+        "advice_011.png"
+      ],
+      "frame_ms": 65,
+      "count": 12,
+      "duration_ms": 780
+    },
+    "teach": {
+      "file": "teach.gif",
+      "frames": [
+        "teach_000.png",
+        "teach_001.png",
+        "teach_002.png",
+        "teach_003.png",
+        "teach_004.png",
+        "teach_005.png",
+        "teach_006.png",
+        "teach_007.png"
+      ],
+      "frame_ms": 60,
+      "count": 8,
+      "duration_ms": 480
+    }
+  }
+}
