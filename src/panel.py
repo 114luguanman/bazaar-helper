@@ -269,12 +269,16 @@ class MonitorWorker(QObject):
                     self.cfg["hero"] = hero
                     config.save_config(self.cfg)
                     self.hero_changed.emit(hero)
-                    if not datahub.get_builds(hero):
-                        try:
-                            datahub.fetch_builds(hero, refresh=True)
-                            self.status.emit(f"已自动更新 {hero} 的攻略数据")
-                        except Exception as e:
-                            self.status.emit(f"攻略更新失败: {e}")
+                    # 后台抓取该英雄攻略（避免阻塞监视线程/崩溃）
+                    if hero in datahub.HEROES and not datahub.get_builds(hero):
+                        def _fetch(hero_=hero):
+                            try:
+                                datahub.fetch_builds(hero_, refresh=True)
+                                self.status.emit(f"已自动更新 {hero_} 的攻略数据")
+                            except Exception as e:
+                                self.status.emit(f"攻略更新失败: {e}")
+                        import threading
+                        threading.Thread(target=_fetch, daemon=True).start()
             except Exception:
                 pass
             self.detected.emit(items)
@@ -1670,12 +1674,28 @@ class Panel(QWidget):
         finally:
             cap.close()
 
+    def quit_app(self):
+        """完全退出：停止监视线程 + 关闭面板（由桌宠"退出"调用）。"""
+        try:
+            if self.worker is not None:
+                self.worker.stop()
+                self.thread.quit()
+                self.thread.wait(5000)  # 缩短等待，避免长时间卡住
+                self.worker = None
+                self.thread = None
+        except Exception:
+            pass
+        try:
+            self.close()
+        except Exception:
+            pass
+
     def closeEvent(self, event):
         if self.worker is not None:
             self.worker.stop()
             self.thread.quit()
             # 等待线程真正结束，避免析构时线程仍在运行
-            self.thread.wait(15000)
+            self.thread.wait(5000)
             self.worker = None
             self.thread = None
         # 清理后台分析/图片线程

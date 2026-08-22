@@ -63,6 +63,10 @@ _TIER_SHOPS = {"Curio", "Silvia", "Goldie", "Luxe"}
 _GENERIC_SHOPS = {"Jay Jay", "Valpak"}
 
 _SHOP_CACHE = None
+_SHOP_RULES_CACHE = None
+
+# 稀有度排序（BPP startingTier AtMost 规则用）
+_TIER_ORDER = {"Bronze": 0, "Silver": 1, "Gold": 2, "Diamond": 3, "Legendary": 4}
 
 
 def _shop_data():
@@ -73,22 +77,125 @@ def _shop_data():
     return _SHOP_CACHE
 
 
+def _shop_rules():
+    """BPP 图鉴商店规则（shop_rules.json）：{商店: {cn, desc_cn, rules: [...]}}。"""
+    global _SHOP_RULES_CACHE
+    if _SHOP_RULES_CACHE is None:
+        _SHOP_RULES_CACHE = config.load_json(os.path.join(config.DATA_DIR, "shop_rules.json")) or {}
+    return _SHOP_RULES_CACHE
+
+
+# 效果词条（BPP hiddenTagGroupsAny）从物品 tooltips 文本推断
+_EFFECT_RE = {
+    "Burn": r"\bBurn\b",
+    "Heal": r"\bHeal\b",
+    "Regen": r"\bRegen\b",
+    "Shield": r"\bShield\b",
+    "Poison": r"\bPoison\b",
+    "Freeze": r"\bFreeze\b",
+    "Slow": r"\bSlow\b",
+    "Haste": r"\bHaste\b",
+    "Crit": r"\bCrit\b",
+    "Ammo": r"\bAmmo\b",
+    "Flying": r"\bFlying\b",
+    "Health": r"\b(?:Max )?Health\b",
+    "Cooldown": r"\bCooldown\b",
+}
+
+
+def _effect_tags(it: dict) -> set:
+    """从物品 tooltips 推断效果词条（用于匹配灼烧/冰冻/中毒等主题商店）。"""
+    txt = " ".join(str(t) for t in (it.get("tooltips") or []))
+    if not txt:
+        txt = " ".join(str(t) for t in (it.get("all_tooltips") or []))
+    tags = set()
+    for eff, pat in _EFFECT_RE.items():
+        if re.search(pat, txt):
+            tags.add(eff)
+    return tags
+
+
+def _rule_matches(rule: dict, it: dict, eff_tags: set) -> bool:
+    """判断 BPP 商店规则段是否匹配物品（词条/效果/尺寸/稀有度/英雄归属）。
+
+    附魔类规则段（enchantmentTypesAny / enchantableOnly，如塞拉菲娜附魔店、
+    各店的附魔后缀段）不参与普通物品的购买商店匹配，一律视为不匹配。
+    """
+    hm = rule.get("heroMode")
+    heroes = it.get("heroes") or []
+    tags = set(it.get("tags") or [])
+    size = it.get("size") or ""
+    tier = it.get("startingTier") or ""
+    # 中立店只卖中立物品
+    if hm == "NeutralOnly" and heroes:
+        return False
+    # 专属英雄店：物品必须属于该英雄
+    if hm == "FixedHero" and rule.get("hero") not in heroes:
+        return False
+    # 附魔类段不参与普通物品匹配
+    if rule.get("enchantmentTypesAny") or rule.get("enchantableOnly"):
+        return False
+    # tagsAny / hiddenTagsAny：原始 tag 命中
+    for key in ("tagsAny", "hiddenTagsAny"):
+        if rule.get(key) and not (tags & set(rule[key])):
+            return False
+    # hiddenTagGroupsAny：效果词条命中（tooltips 推断）
+    if rule.get("hiddenTagGroupsAny") and not (eff_tags & set(rule["hiddenTagGroupsAny"])):
+        return False
+    # sizesAny：尺寸命中
+    if rule.get("sizesAny") and size not in rule["sizesAny"]:
+        return False
+    # startingTier AtMost：稀有度不高于指定
+    st = rule.get("startingTier") or {}
+    if st.get("mode") == "AtMost":
+        limit = _TIER_ORDER.get(st.get("tier"), 0)
+        if _TIER_ORDER.get(tier, 99) > limit:
+            return False
+    return True
+
+
+def _bpp_match_shops(it: dict) -> list:
+    """用 BPP 图鉴规则匹配物品的商店（按优先级排序，返回商店英文名列表）。"""
+    if not it:
+        return []
+    eff_tags = _effect_tags(it)
+    scored = []
+    for shop, meta in _shop_rules().items():
+        rules = meta.get("rules") or []
+        if not rules:
+            continue
+        if any(_rule_matches(r, it, eff_tags) for r in rules):
+            # 优先级：词条主题店 > 尺寸店 > 稀有度店 > 通用店 > 专属英雄店
+            grp = meta.get("group") or ""
+            if grp == "tag-type-specialist":
+                pri = 0
+            elif grp == "size-specialist":
+                pri = 1
+            elif grp == "tier-specialist":
+                pri = 2
+            elif grp == "generalist":
+                pri = 3
+            else:  # FixedHero / all-hero / other-hero
+                pri = 4
+            scored.append((pri, shop))
+    scored.sort(key=lambda x: (x[0], x[1]))
+    return [s for _, s in scored]
+
+
 def shop_advice(item_en: str, top_n: int = 3) -> str:
     """返回某物品的购买商店建议（按优先级），如：武器店·艾拉、大型店·波尔、黄金店·戈尔迪。
 
-    物品在词表内但商店数据缺失（如新英雄物品）时返回 "商店数据待更新" 提示。
+    匹配策略：
+    1. merchants_map 精确映射（老数据，优先）；
+    2. 无精确数据时用 BPP 图鉴规则按词条/效果/尺寸/稀有度推断（如 Karnok 新物品）；
+    3. 词表内仍无匹配 -> "商店数据待更新"；未知物品 -> 空。
     """
     item_shops, shop_cn = _shop_data()
     shops = item_shops.get(item_en)
     if not shops:
         # 尝试用规范化 key 查（标题大小写 vs 小写差异）
         shops = item_shops.get(datahub.normalize_name(item_en)) or item_shops.get(_title_case(item_en))
-    if not shops:
-        # 词表内物品但无商店数据（新物品）-> 提示待更新；未知物品 -> 空
-        it = datahub.get_items().get(item_en.lower()) or datahub.get_items().get(datahub.normalize_name(item_en))
-        if it and it.get("nameCn"):
-            return "商店数据待更新"
-        return ""
+    exact = bool(shops)
 
     def rank(sname):
         if sname in _THEME_SHOPS:
@@ -97,10 +204,25 @@ def shop_advice(item_en: str, top_n: int = 3) -> str:
             return 1
         return 2  # 通用店
 
+    if not shops:
+        # 无精确映射 -> BPP 图鉴规则推断（需物品元数据）
+        items_db = datahub.get_items()
+        it = items_db.get(item_en.lower()) or items_db.get(datahub.normalize_name(item_en))
+        if it:
+            matched = _bpp_match_shops(it)
+            if matched:
+                shops = [{"name": s} for s in matched[:top_n]]
+            else:
+                return "商店数据待更新" if it.get("nameCn") else ""
+        else:
+            return ""
+
     ordered = sorted(shops, key=lambda s: (rank(s["name"]), shops.index(s)))
+    rules_meta = _shop_rules()
     out = []
     for s in ordered[:top_n]:
-        cn = shop_cn.get(s["name"], s["name"])
+        # 中文名：shop_rules（BPP 图鉴，含新商店）优先，回退 merchants_map
+        cn = (rules_meta.get(s["name"]) or {}).get("cn") or shop_cn.get(s["name"], s["name"])
         out.append(cn)
     return "、".join(out)
 
@@ -463,6 +585,16 @@ def recommend(detected_items: dict, hero: str = "mak", builds=None, top_n: int =
         # 统计其他英雄专属的缺失件（无法/很难获得，应大幅降权）
         foreign_missing = [i for i in missing if _item_hero_rank(i, hero_canon, items_db) == 2]
         foreign_core = [i for i in core_missing if _item_hero_rank(i, hero_canon, items_db) == 2]
+        # 稀有度统计：缺失件最高稀有度（前期难获得）；传说/钻石缺失件数（除非玩家已有）
+        def _tier_of(i):
+            it = items_db.get(i.lower()) or items_db.get(datahub.normalize_name(i))
+            return (it or {}).get("startingTier") or ""
+        missing_tiers = [_TIER_RANK.get(_tier_of(i), 2) for i in missing]
+        max_missing_tier = max(missing_tiers) if missing_tiers else 0  # 0=Bronze最低
+        # 高稀有度缺失件（Gold/Diamond/Legendary 且玩家未拥有）数量
+        high_tier_missing = [i for i in missing
+                             if _TIER_RANK.get(_tier_of(i), 2) >= 2 and datahub.normalize_name(i) not in detected_norm]
+        legend_missing = [i for i in missing if _tier_of(i) in ("Diamond", "Legendary")]
         scored.append({
             "build": b,
             "coverage": round(coverage, 2),
@@ -476,14 +608,21 @@ def recommend(detected_items: dict, hero: str = "mak", builds=None, top_n: int =
             "have_cn": [cn(display_of(i)) for i in have],
             "missing_cn": [cn(i) for i in missing],
             "core_missing_cn": [cn(i) for i in core_missing],
+            "max_missing_tier": max_missing_tier,
+            "high_tier_missing": len(high_tier_missing),
+            "legend_missing": len(legend_missing),
             "rank": _parse_score_rank(b),
         })
     # 排序：已拥有组件数多者优先；核心/普通缺失件含其他英雄专属物品的流派大幅降权；
-    # qiubot 天梯组合（真实统计）优先于攻略站（提高权重）；再按覆盖率、出现率、胜场
+    # 缺失件稀有度过高（前期拿不到）或含传说物品（未拥有）降权；qiubot 天梯组合优先；
+    # 再按覆盖率、出现率、胜场
     scored.sort(key=lambda s: (
         -len(s["have"]),
         len(s["foreign_core"]),      # 核心件需其他英雄物品 -> 靠后
         len(s["foreign_missing"]),   # 普通缺失件需其他英雄物品 -> 靠后
+        s["legend_missing"],       # 含传说/钻石缺失件（未拥有）-> 靠后（数量）
+        s["max_missing_tier"],     # 缺失件最高稀有度（低优先，前期好入手）
+        s["high_tier_missing"],    # 高稀有度缺失件数量
         -s["coverage"],
         0 if s["build"].get("source") == "qiubot" else 1,   # qiubot 权重更高
         -(s["build"].get("appearance_rate") or 0),          # 天梯出现率

@@ -829,6 +829,20 @@ class PetOverlay(QWidget):
             config.save_config(self.cfg)
         except Exception:
             pass
+        # 关闭所有子窗口（便利贴等），避免应用不退出
+        for win in (getattr(self, "sticky", None), getattr(self, "pick_sticky", None)):
+            if win is not None:
+                try:
+                    win.close()
+                except Exception:
+                    pass
+        # 通知面板一起退出（停止监视线程并关闭）
+        p = getattr(self, "panel", None)
+        if p is not None:
+            try:
+                p.quit_app()
+            except Exception:
+                pass
         super().closeEvent(event)
 
     # ---------------- 点击菜单与拖拽 ----------------

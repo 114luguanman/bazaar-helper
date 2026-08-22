@@ -16,6 +16,20 @@ from . import config
 
 UUID2NAME = None  # {uuid: 中文名}
 
+# 日志英雄名 -> 应用 key（含新英雄双龙 TheDragons -> dragons）
+_HERO_NORM = {
+    "mak": "mak", "vanessa": "vanessa", "dooley": "dooley", "pygmalien": "pygmalien",
+    "stelle": "stelle", "jules": "jules", "karnok": "karnok",
+    "thedragons": "dragons", "dragons": "dragons", "dragon": "dragons",
+}
+
+
+def _normalize_hero(hero: str) -> str:
+    """规范化英雄名到应用 key；未知返回原值（调用方防御处理）。"""
+    if not hero:
+        return hero
+    return _HERO_NORM.get(hero.lower(), hero.lower())
+
 
 def _build_official_cn(out_path: str) -> dict:
     """从游戏文件构建官方 UUID->中文名 表（GameData TranslationKey + zh-CN 翻译）。"""
@@ -152,6 +166,9 @@ def parse_log(log_path: str = None) -> dict:
         m = re.search(r"Changing EHero to (\w+)", l)
         if m:
             hero = m.group(1).lower()
+    # 规范化英雄名（日志原始值 -> 应用 key）
+    if hero:
+        hero = _normalize_hero(hero)
 
     # 事件按时间顺序播放：实例 -> (section, socket) 跟踪
     inst_pos = {}   # inst -> (section, socket)

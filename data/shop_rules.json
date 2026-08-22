@@ -1,0 +1,940 @@
+{
+ "Aero": {
+  "cn": "载具店·艾罗",
+  "desc": "Sells Vehicles or Drones",
+  "desc_cn": "载具/无人机",
+  "group": "tag-type-specialist",
+  "available_heroes": [
+   "Stelle"
+  ],
+  "rules": [
+   {
+    "heroMode": "SelectedHero",
+    "tagsAny": [
+     "Vehicle",
+     "Drone"
+    ]
+   }
+  ]
+ },
+ "Aila": {
+  "cn": "武器店·艾拉",
+  "desc": "Sells Weapons",
+  "desc_cn": "武器",
+  "group": "tag-type-specialist",
+  "available_heroes": [],
+  "rules": [
+   {
+    "heroMode": "SelectedHero",
+    "tagsAny": [
+     "Weapon"
+    ]
+   }
+  ]
+ },
+ "Aimbot": {
+  "cn": "暴击店·自动瞄准",
+  "desc": "Sells Crit items from any Hero",
+  "desc_cn": "暴击",
+  "group": "all-hero",
+  "available_heroes": [],
+  "rules": [
+   {
+    "heroMode": "AllHeroes",
+    "hiddenTagGroupsAny": [
+     "Crit"
+    ]
+   }
+  ]
+ },
+ "Ande": {
+  "cn": "小型店·安德",
+  "desc": "Sells Small items",
+  "desc_cn": "小型",
+  "group": "size-specialist",
+  "available_heroes": [],
+  "rules": [
+   {
+    "heroMode": "SelectedHero",
+    "sizesAny": [
+     "Small"
+    ]
+   }
+  ]
+ },
+ "Barkun": {
+  "cn": "中大型店·巴昆",
+  "desc": "Sells Medium and Large items. Buys your Small items at +1 Value",
+  "desc_cn": "中大型",
+  "group": "size-specialist",
+  "available_heroes": [],
+  "rules": [
+   {
+    "heroMode": "SelectedHero",
+    "sizesAny": [
+     "Medium",
+     "Large"
+    ]
+   }
+  ]
+ },
+ "Chronos": {
+  "cn": "加速店·柯罗诺斯",
+  "desc": "Sells Haste items",
+  "desc_cn": "急速",
+  "group": "tag-type-specialist",
+  "available_heroes": [],
+  "rules": [
+   {
+    "heroMode": "SelectedHero",
+    "hiddenTagGroupsAny": [
+     "Haste"
+    ]
+   },
+   {
+    "heroMode": "SelectedHero",
+    "enchantmentTypesAny": [
+     "Turbo"
+    ]
+   }
+  ]
+ },
+ "Cobweb": {
+  "cn": "减速店·蛛网",
+  "desc": "Sells Slow items",
+  "desc_cn": "减速",
+  "group": "tag-type-specialist",
+  "available_heroes": [],
+  "rules": [
+   {
+    "heroMode": "SelectedHero",
+    "hiddenTagGroupsAny": [
+     "Slow"
+    ]
+   },
+   {
+    "heroMode": "SelectedHero",
+    "enchantmentTypesAny": [
+     "Heavy"
+    ]
+   }
+  ]
+ },
+ "Colt": {
+  "cn": "弹药店·柯尔特",
+  "desc": "Sells Ammo items",
+  "desc_cn": "弹药",
+  "group": "tag-type-specialist",
+  "available_heroes": [
+   "Vanessa"
+  ],
+  "rules": [
+   {
+    "heroMode": "SelectedHero",
+    "hiddenTagGroupsAny": [
+     "Ammo"
+    ]
+   }
+  ]
+ },
+ "Curio": {
+  "cn": "青铜店·古董",
+  "desc": "Sells Bronze-tier Neutral items",
+  "desc_cn": "青铜中立",
+  "group": "tier-specialist",
+  "available_heroes": [],
+  "rules": [
+   {
+    "heroMode": "NeutralOnly",
+    "startingTier": {
+     "mode": "AtMost",
+     "tier": "Bronze"
+    }
+   }
+  ]
+ },
+ "Dooley": {
+  "cn": "杜利商店",
+  "desc": "Sells items from this Hero",
+  "desc_cn": "",
+  "group": "other-hero",
+  "available_heroes": [
+   "Jules",
+   "Karnok",
+   "Mak",
+   "Pygmalien",
+   "Stelle",
+   "Vanessa",
+   "TheDragons"
+  ],
+  "rules": [
+   {
+    "heroMode": "FixedHero",
+    "hero": "Dooley"
+   }
+  ]
+ },
+ "Eli": {
+  "cn": "药水店·伊莱",
+  "desc": "Sells Potions",
+  "desc_cn": "药水",
+  "group": "tag-type-specialist",
+  "available_heroes": [
+   "Mak"
+  ],
+  "rules": [
+   {
+    "heroMode": "SelectedHero",
+    "tagsAny": [
+     "Potion"
+    ]
+   },
+   {
+    "heroMode": "SelectedHero",
+    "hiddenTagsAny": [
+     "PotionReference"
+    ]
+   }
+  ]
+ },
+ "Flex": {
+  "cn": "生命店·弗莱克斯",
+  "desc": "Sells Max Health items",
+  "desc_cn": "最大生命",
+  "group": "tag-type-specialist",
+  "available_heroes": [
+   "Karnok",
+   "Pygmalien"
+  ],
+  "rules": [
+   {
+    "heroMode": "SelectedHero",
+    "hiddenTagGroupsAny": [
+     "Health"
+    ]
+   }
+  ]
+ },
+ "Freiya": {
+  "cn": "冰冻店·芙蕾雅",
+  "desc": "Sells Freeze items",
+  "desc_cn": "冰冻",
+  "group": "tag-type-specialist",
+  "available_heroes": [],
+  "rules": [
+   {
+    "heroMode": "SelectedHero",
+    "hiddenTagGroupsAny": [
+     "Freeze"
+    ]
+   },
+   {
+    "heroMode": "SelectedHero",
+    "enchantmentTypesAny": [
+     "Icy"
+    ]
+   }
+  ]
+ },
+ "Gaseo": {
+  "cn": "服饰店·加塞奥",
+  "desc": "Sells Apparel from any Hero",
+  "desc_cn": "服饰",
+  "group": "all-hero",
+  "available_heroes": [],
+  "rules": [
+   {
+    "heroMode": "AllHeroes",
+    "tagsAny": [
+     "Apparel"
+    ]
+   }
+  ]
+ },
+ "Gastro": {
+  "cn": "食物店·加斯特罗",
+  "desc": "Sells Foods",
+  "desc_cn": "食物",
+  "group": "tag-type-specialist",
+  "available_heroes": [
+   "Jules"
+  ],
+  "rules": [
+   {
+    "heroMode": "SelectedHero",
+    "tagsAny": [
+     "Food"
+    ]
+   }
+  ]
+ },
+ "Goldie": {
+  "cn": "黄金店·戈尔迪",
+  "desc": "Sells Gold-tier items",
+  "desc_cn": "黄金",
+  "group": "tier-specialist",
+  "available_heroes": [],
+  "rules": [
+   {
+    "heroMode": "SelectedHero",
+    "startingTier": {
+     "mode": "AtMost",
+     "tier": "Gold"
+    }
+   }
+  ]
+ },
+ "Hef": {
+  "cn": "灼烧店·赫夫",
+  "desc": "Sells Burn items",
+  "desc_cn": "灼烧",
+  "group": "tag-type-specialist",
+  "available_heroes": [],
+  "rules": [
+   {
+    "heroMode": "SelectedHero",
+    "hiddenTagGroupsAny": [
+     "Burn"
+    ]
+   },
+   {
+    "heroMode": "SelectedHero",
+    "enchantmentTypesAny": [
+     "Fiery"
+    ]
+   }
+  ]
+ },
+ "Herma": {
+  "cn": "治疗店·赫玛",
+  "desc": "Sells Heal and Regen items",
+  "desc_cn": "治疗/再生",
+  "group": "tag-type-specialist",
+  "available_heroes": [
+   "Jules",
+   "Karnok",
+   "Mak",
+   "Pygmalien"
+  ],
+  "rules": [
+   {
+    "heroMode": "SelectedHero",
+    "hiddenTagGroupsAny": [
+     "Heal",
+     "Regen"
+    ],
+    "hiddenTagsAny": [
+     "HealthRegen"
+    ]
+   }
+  ]
+ },
+ "Jay Jay": {
+  "cn": "杂货店·杰杰",
+  "desc": "Sells items",
+  "desc_cn": "通用",
+  "group": "generalist",
+  "available_heroes": [],
+  "rules": [
+   {
+    "heroMode": "SelectedHero"
+   }
+  ]
+ },
+ "Jules": {
+  "cn": "朱尔斯商店",
+  "desc": "Sells items from this Hero",
+  "desc_cn": "",
+  "group": "other-hero",
+  "available_heroes": [
+   "Dooley",
+   "Karnok",
+   "Mak",
+   "Pygmalien",
+   "Stelle",
+   "Vanessa",
+   "TheDragons"
+  ],
+  "rules": [
+   {
+    "heroMode": "FixedHero",
+    "hero": "Jules"
+   }
+  ]
+ },
+ "The Dragons": {
+  "cn": "双龙商店",
+  "desc": "Sells items from this Hero",
+  "desc_cn": "",
+  "group": "other-hero",
+  "available_heroes": [
+   "Vanessa",
+   "Dooley",
+   "Pygmalien",
+   "Karnok",
+   "Mak",
+   "Stelle",
+   "Jules"
+  ],
+  "rules": [
+   {
+    "heroMode": "FixedHero",
+    "hero": "TheDragons"
+   }
+  ]
+ },
+ "Stickybeans": {
+  "cn": "跨英雄店·粘豆",
+  "desc": "Sells items from other Heroes",
+  "desc_cn": "其他英雄",
+  "group": "other-hero",
+  "available_heroes": [
+   "Vanessa",
+   "Dooley",
+   "Pygmalien",
+   "Karnok",
+   "Mak",
+   "Stelle",
+   "Jules",
+   "TheDragons"
+  ],
+  "rules": [
+   {
+    "heroMode": "OtherHeroes"
+   }
+  ]
+ },
+ "Karnok": {
+  "cn": "卡诺克商店",
+  "desc": "Sells items from this Hero",
+  "desc_cn": "",
+  "group": "other-hero",
+  "available_heroes": [
+   "Dooley",
+   "Jules",
+   "Mak",
+   "Pygmalien",
+   "Stelle",
+   "Vanessa",
+   "TheDragons"
+  ],
+  "rules": [
+   {
+    "heroMode": "FixedHero",
+    "hero": "Karnok"
+   }
+  ]
+ },
+ "Kev's Armory": {
+  "cn": "护盾店·凯夫军械库",
+  "desc": "Sells Health and Shield items",
+  "desc_cn": "生命/护盾",
+  "group": "tag-type-specialist",
+  "available_heroes": [
+   "Dooley",
+   "Jules",
+   "Karnok",
+   "Pygmalien",
+   "Stelle",
+   "Vanessa",
+   "TheDragons"
+  ],
+  "rules": [
+   {
+    "heroMode": "SelectedHero",
+    "hiddenTagGroupsAny": [
+     "Health",
+     "Shield"
+    ]
+   }
+  ]
+ },
+ "Kina": {
+  "cn": "非武器店·奇娜",
+  "desc": "Sells non-Weapon items",
+  "desc_cn": "非武器",
+  "group": "tier-specialist",
+  "available_heroes": [],
+  "rules": [
+   {
+    "heroMode": "SelectedHero",
+    "tagsNone": [
+     "Weapon"
+    ]
+   }
+  ]
+ },
+ "Knightshade": {
+  "cn": "中毒店·暗影骑士",
+  "desc": "Sells Poison items",
+  "desc_cn": "中毒",
+  "group": "tag-type-specialist",
+  "available_heroes": [],
+  "rules": [
+   {
+    "heroMode": "SelectedHero",
+    "hiddenTagGroupsAny": [
+     "Poison"
+    ]
+   },
+   {
+    "heroMode": "SelectedHero",
+    "enchantmentTypesAny": [
+     "Toxic"
+    ]
+   }
+  ]
+ },
+ "Luxe": {
+  "cn": "钻石店·卢克斯",
+  "desc": "Sells Diamond-tier items",
+  "desc_cn": "钻石",
+  "group": "tier-specialist",
+  "available_heroes": [],
+  "rules": [
+   {
+    "heroMode": "SelectedHero",
+    "startingTier": {
+     "mode": "AtMost",
+     "tier": "Diamond"
+    }
+   }
+  ]
+ },
+ "Private Pitchfork": {
+  "cn": "中立店·私家草叉",
+  "desc": "Sells Neutral items",
+  "desc_cn": "中立",
+  "group": "tier-specialist",
+  "available_heroes": [],
+  "rules": [
+   {
+    "heroMode": "NeutralOnly",
+    "tagsNone": [
+     "Loot"
+    ]
+   }
+  ]
+ },
+ "Mak": {
+  "cn": "玛克商店",
+  "desc": "Sells items from this Hero",
+  "desc_cn": "",
+  "group": "other-hero",
+  "available_heroes": [
+   "Dooley",
+   "Jules",
+   "Karnok",
+   "Pygmalien",
+   "Stelle",
+   "Vanessa",
+   "TheDragons"
+  ],
+  "rules": [
+   {
+    "heroMode": "FixedHero",
+    "hero": "Mak"
+   }
+  ]
+ },
+ "Midsworth": {
+  "cn": "大小型店·米兹沃斯",
+  "desc": "Sells Small and Large items. Buys your Medium items at +2 value",
+  "desc_cn": "小/大型",
+  "group": "size-specialist",
+  "available_heroes": [],
+  "rules": [
+   {
+    "heroMode": "SelectedHero",
+    "sizesAny": [
+     "Small",
+     "Large"
+    ]
+   }
+  ]
+ },
+ "Mittel": {
+  "cn": "中型店·米特尔",
+  "desc": "Sells Medium items",
+  "desc_cn": "中型",
+  "group": "size-specialist",
+  "available_heroes": [],
+  "rules": [
+   {
+    "heroMode": "SelectedHero",
+    "sizesAny": [
+     "Medium"
+    ]
+   }
+  ]
+ },
+ "Mr. Morland": {
+  "cn": "地产店·莫兰先生",
+  "desc": "Sells Property items",
+  "desc_cn": "地产",
+  "group": "tag-type-specialist",
+  "available_heroes": [
+   "Pygmalien"
+  ],
+  "rules": [
+   {
+    "heroMode": "SelectedHero",
+    "tagsAny": [
+     "Property"
+    ]
+   }
+  ]
+ },
+ "Nautica": {
+  "cn": "水系店·诺提卡",
+  "desc": "Sells Aquatic items",
+  "desc_cn": "水系",
+  "group": "tag-type-specialist",
+  "available_heroes": [
+   "Vanessa"
+  ],
+  "rules": [
+   {
+    "heroMode": "SelectedHero",
+    "tagsAny": [
+     "Aquatic"
+    ]
+   }
+  ]
+ },
+ "Orion": {
+  "cn": "工具店·猎户座",
+  "desc": "Sells Tools",
+  "desc_cn": "工具",
+  "group": "tag-type-specialist",
+  "available_heroes": [],
+  "rules": [
+   {
+    "heroMode": "SelectedHero",
+    "tagsAny": [
+     "Tool"
+    ]
+   }
+  ]
+ },
+ "Pinfeather": {
+  "cn": "飞行店·飞羽",
+  "desc": "Sells Flying items from any Hero",
+  "desc_cn": "飞行",
+  "group": "all-hero",
+  "available_heroes": [
+   "Dooley",
+   "Karnok",
+   "Mak",
+   "Pygmalien",
+   "Stelle",
+   "Vanessa"
+  ],
+  "rules": [
+   {
+    "heroMode": "AllHeroes",
+    "hiddenTagGroupsAny": [
+     "Flying"
+    ]
+   }
+  ]
+ },
+ "Pol": {
+  "cn": "大型店·波尔",
+  "desc": "Sells Large items",
+  "desc_cn": "大型",
+  "group": "size-specialist",
+  "available_heroes": [
+   "Dooley",
+   "Jules",
+   "Karnok",
+   "Mak",
+   "Pygmalien",
+   "Stelle",
+   "Vanessa"
+  ],
+  "rules": [
+   {
+    "heroMode": "SelectedHero",
+    "sizesAny": [
+     "Large"
+    ]
+   }
+  ]
+ },
+ "Prospero": {
+  "cn": "经济店·普洛斯彼罗",
+  "desc": "Sells Economic items from any hero",
+  "desc_cn": "经济",
+  "group": "all-hero",
+  "available_heroes": [
+   "Pygmalien"
+  ],
+  "rules": [
+   {
+    "heroMode": "AllHeroes",
+    "hiddenTagsAny": [
+     "EconomyReference",
+     "Gold",
+     "Income",
+     "Value",
+     "BuyPrice",
+     "SellPrice"
+    ]
+   }
+  ]
+ },
+ "Pygmalien": {
+  "cn": "皮格马利翁商店",
+  "desc": "Sells items from this Hero",
+  "desc_cn": "",
+  "group": "other-hero",
+  "available_heroes": [
+   "Dooley",
+   "Jules",
+   "Karnok",
+   "Mak",
+   "Stelle",
+   "Vanessa",
+   "TheDragons"
+  ],
+  "rules": [
+   {
+    "heroMode": "FixedHero",
+    "hero": "Pygmalien"
+   }
+  ]
+ },
+ "Quixel": {
+  "cn": "中小型店·奎塞尔",
+  "desc": "Sells Small and Medium items. Buys your Large items at +3 value",
+  "desc_cn": "小/中型",
+  "group": "size-specialist",
+  "available_heroes": [],
+  "rules": [
+   {
+    "heroMode": "SelectedHero",
+    "sizesAny": [
+     "Small",
+     "Medium"
+    ]
+   }
+  ]
+ },
+ "Serafina": {
+  "cn": "附魔店·塞拉菲娜",
+  "desc": "Sells Enchanted items",
+  "desc_cn": "附魔",
+  "group": "generalist",
+  "available_heroes": [],
+  "rules": [
+   {
+    "heroMode": "SelectedHero",
+    "enchantableOnly": true
+   }
+  ]
+ },
+ "Shelter Shelby": {
+  "cn": "伙伴店·雪碧收容所",
+  "desc": "Sells Friend items",
+  "desc_cn": "伙伴",
+  "group": "tag-type-specialist",
+  "available_heroes": [
+   "Karnok",
+   "Vanessa",
+   "TheDragons"
+  ],
+  "rules": [
+   {
+    "heroMode": "SelectedHero",
+    "tagsAny": [
+     "Friend"
+    ]
+   }
+  ]
+ },
+ "Silvia": {
+  "cn": "白银店·西尔维娅",
+  "desc": "Sells Silver-tier items",
+  "desc_cn": "白银",
+  "group": "tier-specialist",
+  "available_heroes": [],
+  "rules": [
+   {
+    "heroMode": "SelectedHero",
+    "startingTier": {
+     "mode": "AtMost",
+     "tier": "Silver"
+    }
+   }
+  ]
+ },
+ "Stelle": {
+  "cn": "斯黛尔商店",
+  "desc": "Sells items from this Hero",
+  "desc_cn": "",
+  "group": "other-hero",
+  "available_heroes": [
+   "Dooley",
+   "Jules",
+   "Karnok",
+   "Mak",
+   "Pygmalien",
+   "Vanessa",
+   "TheDragons"
+  ],
+  "rules": [
+   {
+    "heroMode": "FixedHero",
+    "hero": "Stelle"
+   }
+  ]
+ },
+ "Tatiana": {
+  "cn": "玩具店·塔蒂亚娜",
+  "desc": "Sells Toys from any Hero",
+  "desc_cn": "玩具",
+  "group": "all-hero",
+  "available_heroes": [],
+  "rules": [
+   {
+    "heroMode": "AllHeroes",
+    "tagsAny": [
+     "Toy"
+    ]
+   }
+  ]
+ },
+ "The Antiquarian": {
+  "cn": "遗物店·古董商",
+  "desc": "Sells Relics from any Hero",
+  "desc_cn": "遗物",
+  "group": "all-hero",
+  "available_heroes": [
+   "Dooley",
+   "Karnok",
+   "Mak",
+   "Pygmalien",
+   "Vanessa"
+  ],
+  "rules": [
+   {
+    "heroMode": "AllHeroes",
+    "tagsAny": [
+     "Relic"
+    ]
+   }
+  ]
+ },
+ "The Tester": {
+  "cn": "科技店·测试员",
+  "desc": "Sells your Hero's Tech items",
+  "desc_cn": "科技",
+  "group": "all-hero",
+  "available_heroes": [
+   "Dooley",
+   "Stelle",
+   "TheDragons"
+  ],
+  "rules": [
+   {
+    "heroMode": "SelectedHero",
+    "tagsAny": [
+     "Tech"
+    ]
+   }
+  ]
+ },
+ "Tinker": {
+  "cn": "伙伴店·叮当",
+  "desc": "Sells Friend items",
+  "desc_cn": "伙伴",
+  "group": "tag-type-specialist",
+  "available_heroes": [
+   "Dooley"
+  ],
+  "rules": [
+   {
+    "heroMode": "SelectedHero",
+    "tagsAny": [
+     "Friend"
+    ]
+   }
+  ]
+ },
+ "Tok's Clocks": {
+  "cn": "钟表店·托克",
+  "desc": "Sells Haste, Slow and Cooldown items",
+  "desc_cn": "急速/减速/冷却",
+  "group": "tag-type-specialist",
+  "available_heroes": [
+   "Dooley",
+   "Jules",
+   "Karnok",
+   "Mak",
+   "Stelle",
+   "Vanessa",
+   "TheDragons"
+  ],
+  "rules": [
+   {
+    "heroMode": "SelectedHero",
+    "hiddenTagGroupsAny": [
+     "Haste",
+     "Slow",
+     "Cooldown"
+    ]
+   }
+  ]
+ },
+ "Uitar Center": {
+  "cn": "乐器店·尤塔中心",
+  "desc": "Sells Instruments",
+  "desc_cn": "乐器",
+  "group": "tag-type-specialist",
+  "available_heroes": [
+   "TheDragons"
+  ],
+  "rules": [
+   {
+    "heroMode": "SelectedHero",
+    "tagsAny": [
+     "Instrument"
+    ]
+   }
+  ]
+ },
+ "Valpak": {
+  "cn": "折扣店·瓦尔帕克",
+  "desc": "Sells items. Always sells discounted items",
+  "desc_cn": "折扣",
+  "group": "generalist",
+  "available_heroes": [],
+  "rules": [
+   {
+    "heroMode": "SelectedHero"
+   }
+  ]
+ },
+ "Vanessa": {
+  "cn": "凡妮莎商店",
+  "desc": "Sells items from this Hero",
+  "desc_cn": "",
+  "group": "other-hero",
+  "available_heroes": [
+   "Dooley",
+   "Jules",
+   "Karnok",
+   "Mak",
+   "Pygmalien",
+   "Stelle",
+   "TheDragons"
+  ],
+  "rules": [
+   {
+    "heroMode": "FixedHero",
+    "hero": "Vanessa"
+   }
+  ]
+ }
+}
