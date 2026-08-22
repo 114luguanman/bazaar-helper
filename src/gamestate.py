@@ -174,6 +174,13 @@ def parse_log(log_path: str = None) -> dict:
     inst_pos = {}   # inst -> (section, socket)
     board, stash = {}, {}
 
+    # 记录最后一次 Changing EHero 的行位置：英雄切换 = 新一局开始，
+    # 该行之前的物品事件全部属于上一局，不应残留到当前识别结果。
+    last_hero_line = -1
+    for idx, l in enumerate(lines):
+        if re.search(r"Changing EHero to", l):
+            last_hero_line = idx
+
     def apply_pos(inst, section, sock, swap=True):
         """把实例放到新位置（先移除旧位置）。swap=True 时处理拖拽交换：
         若目标格已有其他实例，被挤出的实例换到本实例的旧位置（The Bazaar 拖卡即交换）。"""
@@ -202,7 +209,8 @@ def parse_log(log_path: str = None) -> dict:
         if nm:
             (board if section == "Hand" else stash)[int(sock)] = nm
 
-    for l in lines:
+    # 只处理最后一次英雄切换之后的日志（之前的物品事件属于上一局，全部丢弃）
+    for l in lines[last_hero_line + 1:]:
         # 新局开始：重置跟踪器（上一局的卡全部清掉）
         if "Starting new run" in l or "NetMessageRunInitialized" in l:
             inst_pos.clear()

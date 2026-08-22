@@ -363,14 +363,8 @@ class MonitorWorker(QObject):
                         items[k] = v
             except Exception:
                 pass
-        # 4) 视觉识别补充（仅当日志无数据时；否则视觉会扫到对手/商店的卡造成干扰）
-        if not items:
-            try:
-                vis = recognize.detect_items(frame, self.cfg)
-                for k, v in vis.items():
-                    items.setdefault(k, v)
-            except Exception:
-                pass
+        # 注意：不做"日志为空时的全屏视觉识别"。开局/换角色后日志无数据即视为空棋盘，
+        # 全屏视觉会把商店/对手的卡误当成玩家物品（上一版残留的"开局识别出几件物品"问题）。
         return items
 
     _advice_requested = Signal(str)  # 需要连接后才可 emit（见 __init__ 说明）
@@ -714,11 +708,12 @@ class Panel(QWidget):
         if items:
             self.btn_analyze_sel.setEnabled(True)
 
-    def _analyze_build_direct(self, build, hero=None):
+    def _analyze_build_direct(self, build, hero=None, show_panel: bool = True):
         """直接分析指定流派（供桌宠菜单"流派搜索"调用）。
 
         分析在后台线程执行（日志解析 + 流派分析 + 布局图下载都不阻塞 GUI），
-        界面立即响应，完成后自动更新。"""
+        界面立即响应，完成后自动更新。
+        show_panel=False 时（桌宠搜索选择）不弹出控制面板。"""
         hero = hero or self.cfg.get("hero", "mak")
         # 锁定该流派：后续监视循环始终以它为目标（除非解除）
         self.cfg["locked_build"] = build
@@ -756,9 +751,9 @@ class Panel(QWidget):
             if slug and not (getattr(self, "_img_dl", None) is not None and self._img_dl.is_alive()):
                 out = os.path.join(IMAGE_CACHE_DIR, f"{slug}.png")
                 if not (os.path.exists(out) and os.path.getsize(out) >= 1000):
-                    def _dl(slug_=slug, out_=out):
+                    def _dl(slug_=slug, out_=out, scr_=build.get("screenshot") or ""):
                         try:
-                            ok = datahub.fetch_build_image(slug_, out_)
+                            ok = datahub.fetch_build_image(slug_, out_, screenshot=scr_)
                             self.image_ready.emit({"ok": ok, "path": out_ if ok else "",
                                                    "link": build.get("link") or "", "slug": slug_})
                         except Exception:
@@ -768,8 +763,10 @@ class Panel(QWidget):
         except Exception:
             pass
 
-        self.show()
-        self.raise_()
+        # 从桌宠菜单搜索选择流派时不弹出控制面板（保持桌宠交互）
+        if show_panel:
+            self.show()
+            self.raise_()
 
     def _wait_thread_ended(self, th, timeout_ms=10000):
         """等待 QThread 真正结束（quit + 循环 wait），避免运行中销毁触发 Qt abort。"""
@@ -901,7 +898,7 @@ class Panel(QWidget):
         out = os.path.join(IMAGE_CACHE_DIR, f"{slug}.png")
         ok = False
         if not os.path.exists(out) or os.path.getsize(out) < 1000:
-            ok = datahub.fetch_build_image(slug, out)
+            ok = datahub.fetch_build_image(slug, out, screenshot=build.get("screenshot") or "")
         else:
             ok = True
         if ok and os.path.exists(out):
@@ -994,9 +991,9 @@ class Panel(QWidget):
         import threading
         if getattr(self, "_img_dl", None) is not None and self._img_dl.is_alive():
             return  # 已有下载在进行，跳过本次
-        def _dl(slug_=slug, out_=out):
+        def _dl(slug_=slug, out_=out, scr_=b.get("screenshot") or ""):
             try:
-                ok = datahub.fetch_build_image(slug_, out_)
+                ok = datahub.fetch_build_image(slug_, out_, screenshot=scr_)
                 self.image_ready.emit({"ok": ok, "path": out_ if ok else "",
                                        "link": b.get("link") or "", "slug": slug_})
             except Exception:

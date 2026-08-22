@@ -475,6 +475,7 @@ def qiubot_comp_to_builds(comp: dict, hero: str) -> list:
                     continue
                 crate = cfg.get("appearance_rate") or 0
                 base_name = "+".join(vcore) if vcore else "+".join(core)
+                scr = cfg.get("screenshot") or ""
                 builds.append({
                     "hero": hero,
                     "title": f"[天梯] {base_name}·完整阵容",
@@ -486,6 +487,7 @@ def qiubot_comp_to_builds(comp: dict, hero: str) -> list:
                     "items": cards, "excerpt": f"完整阵容，出现率 {crate*100:.2f}%",
                     "source": "qiubot", "appearance_rate": crate,
                     "core_cards": core,  # 保留核心组合信息供展示
+                    "screenshot": scr,  # 真实获胜截图（BPP 战报）
                 })
     return builds
 
@@ -535,9 +537,45 @@ def build_thumbnail_url(slug: str):
     return f"https://bazaar-builds.net/wp-content/uploads/og-{slug}.png"  # 兜底模式，见 fetch_build_image
 
 
-def fetch_build_image(slug: str, out_path: str) -> bool:
-    """尝试下载流派页 og:image 截图（后台调用，超时较短避免长时间阻塞）。"""
+def fetch_qiubot_screenshot(screenshot: str, out_path: str) -> bool:
+    """下载巴扎丘Bot 的获胜截图（BPP 战报 webp/png）。
+
+    screenshot 形如 "/screenshots/bzpp-XXX.webp"，URL 为 QIUBOT_BASE + screenshot。
+    """
     import urllib.parse
+    if not screenshot:
+        return False
+    url = screenshot if screenshot.startswith("http") else QIUBOT_BASE + screenshot
+    try:
+        data = _http_get_bytes(url, timeout=15)
+        with open(out_path, "wb") as f:
+            f.write(data)
+        return len(data) > 1000
+    except Exception:
+        return False
+
+
+def fetch_build_image(slug: str, out_path: str, screenshot: str = "") -> bool:
+    """尝试下载流派截图（后台调用，超时较短避免长时间阻塞）。
+
+    优先级：显式传入的 qiubot screenshot（精确到该 config）> qiubot 缓存里找 > bazaar-builds og:image。
+    """
+    import urllib.parse
+    if screenshot:
+        return fetch_qiubot_screenshot(screenshot, out_path)
+    if slug and slug.startswith("qiubot-"):
+        # 从组合缓存中找对应 build 的 screenshot 字段
+        try:
+            hero = slug.split("-")[1]
+            comp = fetch_qiubot_comp(hero)
+            for layer in (comp.get("layers") or []):
+                for vart in (layer.get("l2_variants") or []):
+                    for cfg in (vart.get("configs") or []):
+                        if cfg.get("screenshot"):
+                            return fetch_qiubot_screenshot(cfg["screenshot"], out_path)
+        except Exception:
+            pass
+        return False
     # 通过页面 meta 拿真实图 URL
     try:
         page_url = f"https://bazaar-builds.net/{slug}/"

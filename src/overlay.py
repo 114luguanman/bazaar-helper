@@ -150,6 +150,7 @@ class AdviceSticky(QWidget):
         self._drag = None
         self._press_pos = None
         self._text = ""
+        self._user_closed = False  # 用户点击过 ×：之后不自动开启，直到手动重新显示
         self._resize_edge = None  # 正在拖拽的缩放边: 'se' | 'e' | 's' | None
         self.setMouseTracking(True)
         self._w = int(cfg.get("sticky_w", 340))
@@ -197,7 +198,7 @@ class AdviceSticky(QWidget):
         if swaps:
             lines.append("🗑 可换：" + "、".join(datahub.item_cn(s["item"]) for s in swaps[:3]))
         # 摆放建议（tips 里含"摆放："前缀的条目）
-        tips = rec.get("tips") if rec else []
+        tips = (rec.get("tips") if rec else None) or []
         p_tips = [t for t in tips if t.startswith("摆放：")][:3]
         if p_tips:
             lines.append("📐 " + "；".join(t.replace("摆放：", "") for t in p_tips))
@@ -205,6 +206,9 @@ class AdviceSticky(QWidget):
         if text != self._text:
             self._text = text
             self.update()
+        # 用户叉掉过：只更新内容不自动弹出（等用户手动"重新显示"）
+        if self._user_closed:
+            return
         self.show()
         self.raise_()
 
@@ -331,6 +335,7 @@ class AdviceSticky(QWidget):
     def mousePressEvent(self, e):
         if e.button() == Qt.LeftButton:
             if self._close_rect().contains(e.position().toPoint()):
+                self._user_closed = True  # 用户主动关闭：不再自动弹出
                 self.hide()
                 return
             edge = self._edge_at(e.position().toPoint())
@@ -387,13 +392,19 @@ class AdviceSticky(QWidget):
     def _show_menu(self, pos):
         menu = QMenu(self)
         a = menu.addAction("重新显示")
-        a.triggered.connect(self.show)
+        a.triggered.connect(self._reopen)
         a = menu.addAction("默认大小")
         a.triggered.connect(self._reset_size)
         menu.addSeparator()
         a = menu.addAction("隐藏")
         a.triggered.connect(self.hide)
         menu.exec(pos)
+
+    def _reopen(self):
+        """手动重新显示便利贴（清除"用户已关闭"标志，之后自动更新会继续弹出）。"""
+        self._user_closed = False
+        self.show()
+        self.raise_()
 
     def _reset_size(self):
         self.resize(340, 210)
@@ -814,6 +825,7 @@ class PetOverlay(QWidget):
         self.cfg["sticky_enabled"] = not self.cfg.get("sticky_enabled", True)
         config.save_config(self.cfg)
         if self.cfg["sticky_enabled"]:
+            self.sticky._user_closed = False  # 重新开启：恢复自动弹出
             p = getattr(self, "panel", None)
             rec = getattr(p, "_last_rec", None) if p else None
             if rec:
@@ -1103,8 +1115,8 @@ class PetOverlay(QWidget):
         hero = getattr(self, "_pending_search_hero", None) or self.cfg.get("hero", "mak")
         p = getattr(self, "panel", None)
         if p is not None and hasattr(p, "_analyze_build_direct"):
-            # 面板方法会设置锁定、更新便利贴与界面
-            p._analyze_build_direct(build, hero)
+            # 面板方法会设置锁定、更新便利贴与界面；从桌宠选择不弹出控制面板
+            p._analyze_build_direct(build, hero, show_panel=False)
         else:
             from . import advisor, gamestate
             gs = gamestate.parse_log()
