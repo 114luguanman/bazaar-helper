@@ -18,6 +18,15 @@ data/card_features_*.npz
 data/board_images/
 diagnose/
 
+# 崩溃诊断日志（运行时生成，不入库）
+data/crash.log
+data/qt_messages.log
+data/qt_sim.log
+data/faulthandler.log
+data/faulthandler_sim.log
+data/faulthandler_test.log
+data/qt_test.log
+
 # 用户个人桌宠素材（不入库）
 assets/pet/input/蓝色大肥鱼.jpg
 assets/pet/anims/蓝色大肥鱼/
