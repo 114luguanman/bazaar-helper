@@ -323,18 +323,21 @@ class MonitorWorker(QObject):
                                  stash_sockets=gs.get("stash") if gs else None)
 
     def _detect_on_frame(self, frame):
-        """识别帧内物品：① 游戏日志（100%准确阵容）② 卡牌校准位置 ③ 视觉识别补充。"""
+        """识别帧内物品：① 游戏日志（100%准确阵容）② 卡牌校准位置（仅日志有数据时补全）③ 棋盘视觉补充。"""
         from . import gamestate
         items = {}
-        # 1) 游戏日志（权威）
+        # 1) 游戏日志（权威，也是"是否有局在进行"的判据）
         try:
             gs = gamestate.parse_log()
             items.update(gamestate.build_detected_items(gs))
         except Exception:
             pass
-        # 2) 卡牌校准位置
+        # 2) 卡牌校准位置：只在日志已识别到物品时启用。
+        #    开局/换角色后棋盘为空，日志无数据——此时校准区域对应的屏幕位置
+        #    可能是商店物品或背景图案，match_card_icon 会误判成玩家物品
+        #    （"开局识别出几个根本没有的东西"的根源）。校准只用于补全日志漏掉的卡。
         calib = self.cfg.get("board_calibration")
-        if calib:
+        if items and calib:
             region = self.cfg.get("capture_region")
             ox = region[0] if region else 0
             oy = region[1] if region else 0

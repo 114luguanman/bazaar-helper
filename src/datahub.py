@@ -540,14 +540,20 @@ def build_thumbnail_url(slug: str):
 def fetch_qiubot_screenshot(screenshot: str, out_path: str) -> bool:
     """下载巴扎丘Bot 的获胜截图（BPP 战报 webp/png）。
 
-    screenshot 形如 "/screenshots/bzpp-XXX.webp"，URL 为 QIUBOT_BASE + screenshot。
+    screenshot 可能为：
+      - 完整 URL：https://usercontent.bzdb.network/screenshots/xxx.webp（/api/runs 返回）
+      - 相对路径：/screenshots/bzpp-xxx.webp（/api/comp 返回，需补 CDN 域名）
     """
     import urllib.parse
     if not screenshot:
         return False
-    url = screenshot if screenshot.startswith("http") else QIUBOT_BASE + screenshot
+    if screenshot.startswith("/"):
+        # /api/comp 只返回相对路径，真实图片在 BPP 的 CDN（bzdb.network）
+        screenshot = "https://usercontent.bzdb.network" + screenshot
+    elif not screenshot.startswith("http"):
+        screenshot = "https://usercontent.bzdb.network/screenshots/" + screenshot.lstrip("/")
     try:
-        data = _http_get_bytes(url, timeout=15)
+        data = _http_get_bytes(screenshot, timeout=15)
         with open(out_path, "wb") as f:
             f.write(data)
         return len(data) > 1000

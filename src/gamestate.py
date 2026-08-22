@@ -174,12 +174,14 @@ def parse_log(log_path: str = None) -> dict:
     inst_pos = {}   # inst -> (section, socket)
     board, stash = {}, {}
 
-    # 记录最后一次 Changing EHero 的行位置：英雄切换 = 新一局开始，
+    # 新一局起点：最后一次 run.started / NetMessageRunInitialized / Starting new run。
     # 该行之前的物品事件全部属于上一局，不应残留到当前识别结果。
-    last_hero_line = -1
+    # （注意：Changing EHero 在选人界面会多次触发，不适合作为截断点）
+    last_run_start = -1
     for idx, l in enumerate(lines):
-        if re.search(r"Changing EHero to", l):
-            last_hero_line = idx
+        if ("run_lifecycle.run.started" in l or "Starting new run" in l
+                or "NetMessageRunInitialized" in l):
+            last_run_start = idx
 
     def apply_pos(inst, section, sock, swap=True):
         """把实例放到新位置（先移除旧位置）。swap=True 时处理拖拽交换：
@@ -209,10 +211,10 @@ def parse_log(log_path: str = None) -> dict:
         if nm:
             (board if section == "Hand" else stash)[int(sock)] = nm
 
-    # 只处理最后一次英雄切换之后的日志（之前的物品事件属于上一局，全部丢弃）
-    for l in lines[last_hero_line + 1:]:
-        # 新局开始：重置跟踪器（上一局的卡全部清掉）
-        if "Starting new run" in l or "NetMessageRunInitialized" in l:
+    # 只处理最后一次新局标记之后的日志（之前的物品事件属于上一局，全部丢弃）
+    for l in lines[last_run_start + 1:]:
+        # 新局开始（行内再次出现标记）：重置跟踪器（上一局的卡全部清掉）
+        if "Starting new run" in l or "NetMessageRunInitialized" in l or "run_lifecycle.run.started" in l:
             inst_pos.clear()
             board.clear()
             stash.clear()
