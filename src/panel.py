@@ -585,7 +585,7 @@ class Panel(QWidget):
             self.cmb_hero.addItem(datahub.HERO_CN.get(h, h), h)
         idx = datahub.HEROES.index(self.cfg.get("hero", "mak")) if self.cfg.get("hero") in datahub.HEROES else 0
         self.cmb_hero.setCurrentIndex(idx)
-        self.cmb_hero.currentIndexChanged.connect(self._on_hero_changed)
+        self.cmb_hero.currentIndexChanged.connect(self._on_hero_combo_changed)
         f.addRow("当前英雄", self.cmb_hero)
 
         # 流派搜索：按物品名/标题搜索
@@ -877,7 +877,7 @@ class Panel(QWidget):
         else:
             self.lbl_board.setText(f"无法获取参考图，可在浏览器打开: {build.get('link','')}")
 
-    def _on_hero_changed(self, idx):
+    def _on_hero_combo_changed(self, idx):
         hero = self.cmb_hero.itemData(idx)
         self.cfg["hero"] = hero
         config.save_config(self.cfg)

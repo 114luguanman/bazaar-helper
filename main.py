@@ -20,6 +20,31 @@ def main():
     config.ensure_dirs()
     cfg = config.load_config()
 
+    # 崩溃日志：pythonw 无控制台，未捕获异常会静默退出（用户看到"闪退"），写文件便于定位
+    import datetime
+    _crash_log = os.path.join(config.DATA_DIR, "crash.log")
+    def _hook(tp, val, tb):
+        try:
+            import traceback
+            with open(_crash_log, "a", encoding="utf-8") as f:
+                f.write(f"\n===== {datetime.datetime.now()} =====\n")
+                traceback.print_exception(tp, val, tb, file=f)
+        except Exception:
+            pass
+    sys.excepthook = _hook
+    import threading
+    threading.excepthook = _hook
+
+    # 单实例保护：防止重复启动导致两个实例同时写配置/读日志/屏幕捕获而崩溃
+    import socket
+    try:
+        _lock_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        _lock_sock.bind(("127.0.0.1", 47321))  # 固定端口，仅本机
+        _lock_sock.listen(1)
+    except OSError:
+        print("已有实例在运行，本实例退出。")
+        return
+
     # 首次运行：若无任何桌宠，生成内置示例桌宠
     if not animgen.list_pets():
         try:
