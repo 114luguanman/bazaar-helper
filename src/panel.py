@@ -385,6 +385,7 @@ class MonitorWorker(QObject):
 class Panel(QWidget):
     partner_result_ready = Signal(str)
     partner_hot_ready = Signal(str)
+    image_ready = Signal(dict)   # 后台布局图下载完成 -> 主线程显示
 
     def __init__(self, cfg: dict, overlay: PetOverlay):
         super().__init__()
@@ -731,7 +732,7 @@ class Panel(QWidget):
         self.lbl_board.setText("正在获取流派信息与布局图…")
         self.lbl_board.setStyleSheet("border: 1px dashed #aaa; color: #888;")
 
-        # 清理旧的 worker
+        # 清理旧的 worker（旧线程必须已结束，否则运行中销毁会 abort）
         self._cleanup_analyze_worker()
 
         # 后台分析
@@ -747,19 +748,50 @@ class Panel(QWidget):
         self._analyze_thread.finished.connect(self._cleanup_analyze_worker)
         self._analyze_thread.start()
 
-        # 布局图下载同样在后台线程（与分析并行）
-        self._image_thread = QThread(self)
-        self._image_worker = AnalyzeWorker(build, hero, {})
-        self._image_worker.moveToThread(self._image_thread)
-        self._image_thread.started.connect(self._image_worker.load_image)
-        self._image_worker.image_ready.connect(self._on_analyze_image)
-        self._image_thread.finished.connect(self._cleanup_image_worker)
-        self._image_thread.start()
+        # 布局图下载：用 Python threading（daemon），避免 QThread 网络阻塞无法中断
+        # 导致运行中销毁触发 Qt abort。
+        try:
+            import threading as _th
+            slug = build.get("slug")
+            if slug and not (getattr(self, "_img_dl", None) is not None and self._img_dl.is_alive()):
+                out = os.path.join(IMAGE_CACHE_DIR, f"{slug}.png")
+                if not (os.path.exists(out) and os.path.getsize(out) >= 1000):
+                    def _dl(slug_=slug, out_=out):
+                        try:
+                            ok = datahub.fetch_build_image(slug_, out_)
+                            self.image_ready.emit({"ok": ok, "path": out_ if ok else "",
+                                                   "link": build.get("link") or "", "slug": slug_})
+                        except Exception:
+                            self.image_ready.emit({"ok": False, "path": "", "link": build.get("link") or "", "slug": slug_})
+                    self._img_dl = _th.Thread(target=_dl, daemon=True)
+                    self._img_dl.start()
+        except Exception:
+            pass
 
         self.show()
         self.raise_()
 
+    def _wait_thread_ended(self, th, timeout_ms=10000):
+        """等待 QThread 真正结束（quit + 循环 wait），避免运行中销毁触发 Qt abort。"""
+        if th is None or not th.isRunning():
+            return True
+        try:
+            th.quit()
+            deadline = time.time() + timeout_ms / 1000.0
+            while th.isRunning() and time.time() < deadline:
+                th.wait(100)
+            return not th.isRunning()
+        except Exception:
+            return not (th.isRunning() if th is not None else False)
+
     def _cleanup_analyze_worker(self):
+        # 必须等线程真正结束才能 deleteLater：运行中的 QThread 被销毁会触发 Qt abort
+        th = getattr(self, "_analyze_thread", None)
+        if th is not None:
+            try:
+                self._wait_thread_ended(th, 30000)  # 本地分析很快；网络下载有超时保护
+            except Exception:
+                pass
         for attr in ("_analyze_thread", "_analyze_worker"):
             obj = getattr(self, attr, None)
             if obj is not None:
@@ -770,6 +802,11 @@ class Panel(QWidget):
                 setattr(self, attr, None)
 
     def _cleanup_image_worker(self):
+        th = getattr(self, "_image_thread", None)
+        if th is not None and th.isRunning():
+            # 线程仍在运行（网络下载中）：不销毁不置空，交给 finished 信号清理；
+            # 否则运行中的 QThread 被 deleteLater/GC 会触发 Qt abort。
+            return False
         for attr in ("_image_thread", "_image_worker"):
             obj = getattr(self, attr, None)
             if obj is not None:
@@ -778,6 +815,7 @@ class Panel(QWidget):
                 except Exception:
                     pass
                 setattr(self, attr, None)
+        return True
 
     def _on_analyze_done(self, rec, build):
         """后台分析完成：更新界面。"""
@@ -950,14 +988,21 @@ class Panel(QWidget):
                                                     Qt.KeepAspectRatio, Qt.SmoothTransformation))
                 self.lbl_board.setStyleSheet("")
                 return
-        self._cleanup_image_worker()
-        self._image_thread = QThread(self)
-        self._image_worker = AnalyzeWorker(b, self.cfg.get("hero", "mak"), {})
-        self._image_worker.moveToThread(self._image_thread)
-        self._image_thread.started.connect(self._image_worker.load_image)
-        self._image_worker.image_ready.connect(self._on_analyze_image)
-        self._image_thread.finished.connect(self._cleanup_image_worker)
-        self._image_thread.start()
+        # 后台下载布局图：用 Python threading（daemon），不用 QThread——
+        # QThread 无法被 quit() 中断网络阻塞，进程退出/面板关闭时运行中的 QThread
+        # 被销毁会触发 Qt abort（0xc0000409）。
+        import threading
+        if getattr(self, "_img_dl", None) is not None and self._img_dl.is_alive():
+            return  # 已有下载在进行，跳过本次
+        def _dl(slug_=slug, out_=out):
+            try:
+                ok = datahub.fetch_build_image(slug_, out_)
+                self.image_ready.emit({"ok": ok, "path": out_ if ok else "",
+                                       "link": b.get("link") or "", "slug": slug_})
+            except Exception:
+                self.image_ready.emit({"ok": False, "path": "", "link": b.get("link") or "", "slug": slug_})
+        self._img_dl = threading.Thread(target=_dl, daemon=True)
+        self._img_dl.start()
 
     def _show_swaps(self):
         if not self._last_rec:
@@ -1016,6 +1061,7 @@ class Panel(QWidget):
         # 信号连接（后台线程 -> GUI 线程）
         self.partner_result_ready.connect(self._show_partner_result)
         self.partner_hot_ready.connect(self._set_partner_hot)
+        self.image_ready.connect(self._on_analyze_image)
         # 加载热门物品建议
         self._load_partner_hot()
 
@@ -1695,15 +1741,17 @@ class Panel(QWidget):
             self.worker.stop()
             self.thread.quit()
             # 等待线程真正结束，避免析构时线程仍在运行
-            self.thread.wait(5000)
+            try:
+                self.thread.wait(8000)
+            except Exception:
+                pass
             self.worker = None
             self.thread = None
-        # 清理后台分析/图片线程
+        # 清理后台分析/图片线程（等待结束，避免运行中销毁触发 abort）
         for th in (getattr(self, "_analyze_thread", None), getattr(self, "_image_thread", None)):
             if th is not None:
                 try:
-                    th.quit()
-                    th.wait(3000)
+                    self._wait_thread_ended(th, 8000)
                 except Exception:
                     pass
         self.cfg["monitor_interval"] = self.spin_interval.value()

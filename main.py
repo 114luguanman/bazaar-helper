@@ -20,6 +20,14 @@ def main():
     config.ensure_dirs()
     cfg = config.load_config()
 
+    # faulthandler：捕获 abort/段错误（Qt 0xc0000409 崩溃）时所有线程的 Python 调用栈
+    try:
+        import faulthandler
+        faulthandler.enable(open(os.path.join(config.DATA_DIR, "faulthandler.log"), "w"))
+        faulthandler.register(22)  # SIGABRT（Qt abort 触发）
+    except Exception:
+        pass
+
     # 崩溃日志：pythonw 无控制台，未捕获异常会静默退出（用户看到"闪退"），写文件便于定位
     import datetime
     _crash_log = os.path.join(config.DATA_DIR, "crash.log")
@@ -34,6 +42,18 @@ def main():
     sys.excepthook = _hook
     import threading
     threading.excepthook = _hook
+
+    # Qt 消息捕获：Qt 在 abort/崩溃前会输出 qFatal/qCritical 消息（pythonw 无控制台会丢失），
+    # 写入 qt_messages.log 便于定位 0xc0000409 崩溃根因
+    from PySide6.QtCore import qInstallMessageHandler, QtMsgType  # noqa: F401
+    _qt_log = os.path.join(config.DATA_DIR, "qt_messages.log")
+    def _qt_handler(mtype, ctx, msg):
+        try:
+            with open(_qt_log, "a", encoding="utf-8") as f:
+                f.write(f"[{datetime.datetime.now().strftime('%H:%M:%S')}] [{int(mtype)}] {msg}\n")
+        except Exception:
+            pass
+    qInstallMessageHandler(_qt_handler)
 
     # 单实例保护：防止重复启动导致两个实例同时写配置/读日志/屏幕捕获而崩溃
     import socket
