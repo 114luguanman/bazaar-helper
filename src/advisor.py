@@ -74,10 +74,20 @@ def _shop_data():
 
 
 def shop_advice(item_en: str, top_n: int = 3) -> str:
-    """返回某物品的购买商店建议（按优先级），如：武器店·艾拉、大型店·波尔、黄金店·戈尔迪。"""
+    """返回某物品的购买商店建议（按优先级），如：武器店·艾拉、大型店·波尔、黄金店·戈尔迪。
+
+    物品在词表内但商店数据缺失（如新英雄物品）时返回 "商店数据待更新" 提示。
+    """
     item_shops, shop_cn = _shop_data()
     shops = item_shops.get(item_en)
     if not shops:
+        # 尝试用规范化 key 查（标题大小写 vs 小写差异）
+        shops = item_shops.get(datahub.normalize_name(item_en)) or item_shops.get(_title_case(item_en))
+    if not shops:
+        # 词表内物品但无商店数据（新物品）-> 提示待更新；未知物品 -> 空
+        it = datahub.get_items().get(item_en.lower()) or datahub.get_items().get(datahub.normalize_name(item_en))
+        if it and it.get("nameCn"):
+            return "商店数据待更新"
         return ""
 
     def rank(sname):
@@ -93,6 +103,20 @@ def shop_advice(item_en: str, top_n: int = 3) -> str:
         cn = shop_cn.get(s["name"], s["name"])
         out.append(cn)
     return "、".join(out)
+
+
+def _title_case(name: str) -> str:
+    """英文名转标题大小写（匹配 merchants_map 的 key 格式）。"""
+    return " ".join(w.capitalize() for w in (name or "").split())
+
+
+def _shop_suffix(adv: str) -> str:
+    """商店建议的后缀：有商店 -> （去XX买）；待更新 -> （商店数据待更新）；无 -> 空。"""
+    if not adv:
+        return ""
+    if adv == "商店数据待更新":
+        return "（商店数据待更新）"
+    return f"（去 {adv} 买）"
 
 
 _MONSTER_CACHE = None
@@ -506,7 +530,7 @@ def recommend(detected_items: dict, hero: str = "mak", builds=None, top_n: int =
                 adv = shop_advice(en)
                 note = _hero_note(en, hero_canon, items_db)
                 name = cn_with_brief(en) if idx < 2 else cn(en)
-                shop_lines.append(f"{name}{note}" + (f"（去 {adv} 买）" if adv else ""))
+                shop_lines.append(f"{name}{note}{_shop_suffix(adv)}")
             teach.append("最优先补的核心件：" + "；".join(shop_lines))
         elif best["missing"]:
             shop_lines = []
@@ -514,7 +538,7 @@ def recommend(detected_items: dict, hero: str = "mak", builds=None, top_n: int =
                 adv = shop_advice(en)
                 note = _hero_note(en, hero_canon, items_db)
                 name = cn_with_brief(en) if idx < 2 else cn(en)
-                shop_lines.append(f"{name}{note}" + (f"（去 {adv} 买）" if adv else ""))
+                shop_lines.append(f"{name}{note}{_shop_suffix(adv)}")
             teach.append("还需补齐：" + "；".join(shop_lines))
         else:
             teach.append("组件已齐！注意关键件的相邻关系。")
@@ -790,7 +814,7 @@ def analyze_build(build: dict, detected_items: dict, hero: str,
             adv = shop_advice(en)
             note = _hero_note(en, hero_canon, items_db)
             name = cn_with_brief(en) if idx < 2 else cn(en)
-            shop_lines.append(f"{name}{note}" + (f"（去 {adv} 买）" if adv else ""))
+            shop_lines.append(f"{name}{note}{_shop_suffix(adv)}")
         teach.append("最优先补的核心件：" + "；".join(shop_lines))
     elif missing:
         shop_lines = []
@@ -798,7 +822,7 @@ def analyze_build(build: dict, detected_items: dict, hero: str,
             adv = shop_advice(en)
             note = _hero_note(en, hero_canon, items_db)
             name = cn_with_brief(en) if idx < 2 else cn(en)
-            shop_lines.append(f"{name}{note}" + (f"（去 {adv} 买）" if adv else ""))
+            shop_lines.append(f"{name}{note}{_shop_suffix(adv)}")
         teach.append("还需补齐：" + "；".join(shop_lines))
     else:
         teach.append("组件已齐！注意关键件的相邻关系。")
