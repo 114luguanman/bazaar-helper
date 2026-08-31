@@ -115,6 +115,50 @@ def default_log_path() -> str:
     return os.path.expandvars(r"%USERPROFILE%\AppData\LocalLow\Tempo Storm\The Bazaar\Player.log")
 
 
+def _load_lookingin_map() -> dict:
+    """LookingIN 插件诊断数据：实例ID -> TemplateId 映射。
+
+    游戏重启会覆盖 Player.log，购买记录（Card Purchased 的 TemplateId）丢失；
+    但 LookingIN 的 pve 诊断 JSON 记录了战斗时手牌的 实例ID->TemplateId，
+    可用于恢复续玩时 Cards Spawned 的实例映射。按文件 mtime 缓存。
+    """
+    cache = getattr(_load_lookingin_map, "_cache", None)
+    if cache is not None:
+        return cache
+    result = {}
+    base = r"N:\SteamLibrary\steamapps\common\The Bazaar\BepInEx\logs\LookingIN\diagnostics-v2"
+    for sub in ("pve", "pvp"):
+        d = os.path.join(base, sub)
+        if not os.path.isdir(d):
+            continue
+        try:
+            names = sorted(os.listdir(d), key=lambda n: os.path.getmtime(os.path.join(d, n)))
+        except Exception:
+            continue
+        for n in names[-12:]:  # 只读最近 12 个文件（足够覆盖当前局）
+            p = os.path.join(d, n)
+            try:
+                data = json.load(open(p, encoding="utf-8"))
+            except Exception:
+                continue
+
+            def walk(o):
+                if isinstance(o, dict):
+                    cards = o.get("cards")
+                    if isinstance(cards, list):
+                        for c in cards:
+                            if isinstance(c, dict) and c.get("instanceId") and c.get("templateId"):
+                                result.setdefault(c["instanceId"], c["templateId"])
+                    for v in o.values():
+                        walk(v)
+                elif isinstance(o, list):
+                    for v in o:
+                        walk(v)
+            walk(data)
+    _load_lookingin_map._cache = result
+    return result
+
+
 def parse_log(log_path: str = None) -> dict:
     """解析日志：事件跟踪 → 实时棋盘/背包状态（100%准确）。返回 {board, stash, board_items, all_items}。"""
     log_path = log_path or default_log_path()
@@ -141,15 +185,34 @@ def parse_log(log_path: str = None) -> dict:
         try:
             sc = json.load(open(sc_path, encoding="utf-8")).get("inst_to_temp", {})
             for inst, tpl in sc.items():
-                if inst.startswith("itm_") and tpl not in inst2uuid.values():
+                if inst.startswith("itm_"):
                     inst2uuid.setdefault(inst, tpl)
         except Exception:
             pass
+    # LookingIN 插件诊断数据兜底（游戏重启覆盖日志后恢复实例->TemplateId）
+    # 注意：同名卡多个实例共享 TemplateId，不能按 tpl 去重（否则后续实例被跳过）
+    try:
+        for inst, tpl in _load_lookingin_map().items():
+            if inst.startswith("itm_"):
+                inst2uuid.setdefault(inst, tpl)
+    except Exception:
+        pass
 
     def resolve(inst):
         uuid = inst2uuid.get(inst, "")
         # 优先英文 key（唯一，可直接匹配攻略词表）；无则中文名
         name = uuid2en.get(uuid) or names.get(uuid) or None
+        if not name:
+            # 兜底：BPP 战斗快照索引（实例ID -> 名字）。
+            # 游戏重启会覆盖 Player.log 导致购买记录丢失，此时 Cards Spawned
+            # 恢复的手牌实例没有 TemplateId；BPP 战斗快照记录了实例名，可补全。
+            try:
+                from . import bpp
+                entry = bpp._load_index().get(inst)
+                if entry and entry.get("name"):
+                    name = entry["name"]
+            except Exception:
+                pass
         if not name:
             return None
         # 附魔前缀（来自 BPP 战斗快照；无附魔返回原名）
