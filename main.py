@@ -57,12 +57,21 @@ def main():
 
     # 单实例保护：防止重复启动导致两个实例同时写配置/读日志/屏幕捕获而崩溃
     import socket
+    _lock_sock = None
     try:
         _lock_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         _lock_sock.bind(("127.0.0.1", 47321))  # 固定端口，仅本机
         _lock_sock.listen(1)
     except OSError:
-        print("已有实例在运行，本实例退出。")
+        # 已有实例在运行：向旧实例发送"唤起"请求（显示面板/桌宠），然后本实例退出
+        try:
+            _wake = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            _wake.settimeout(2)
+            _wake.connect(("127.0.0.1", 47321))
+            _wake.sendall(b"show")
+            _wake.close()
+        except Exception:
+            pass
         return
 
     # 首次运行：若无任何桌宠，生成内置示例桌宠
@@ -100,6 +109,30 @@ def main():
 
     panel = Panel(cfg, overlay)
     panel.hide()  # 控制面板默认隐藏：所有功能已浓缩进桌宠菜单（点击桌宠即可使用）
+
+    # 单实例"唤起"监听：重复点击快捷方式时，旧实例收到 show 请求后显示窗口
+    def _wake_listener():
+        import threading
+        def _serve():
+            while True:
+                try:
+                    conn, _ = _lock_sock.accept()
+                    try:
+                        data = conn.recv(64)
+                    finally:
+                        conn.close()
+                    if data:
+                        # 跨线程安全地唤起窗口（用 QMetaObject 排队到 GUI 线程）
+                        from PySide6.QtCore import QMetaObject, Qt, Q_ARG
+                        QMetaObject.invokeMethod(overlay, "show_pet", Qt.QueuedConnection)
+                        QMetaObject.invokeMethod(panel, "_show_panel", Qt.QueuedConnection)
+                except Exception:
+                    break
+        threading.Thread(target=_serve, daemon=True).start()
+
+    if _lock_sock is not None:
+        _wake_listener()
+
     sys.exit(app.exec())
 
 
