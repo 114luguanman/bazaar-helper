@@ -1445,6 +1445,7 @@ class Panel(QWidget):
 
         threading.Thread(target=watchdog, daemon=True).start()
 
+    @Slot()
     def _on_data_done(self):
         """后台数据更新完成回调（GUI 线程）。"""
         result = getattr(self, "_data_result", None) or {}
