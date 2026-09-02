@@ -12,6 +12,8 @@ venv/
 data/config.json
 data/qiubot_comp.json
 data/bpp_enchant_cache.json
+data/codex_cache.json
+data/tags_cache.json
 data/GameData.db
 data/gamedata_cards.json
 data/card_features_*.npz
