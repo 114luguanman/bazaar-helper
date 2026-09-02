@@ -7,12 +7,18 @@ import io
 import json
 import os
 import re
+import socket
 import sys
 import time
 import urllib.error
 import urllib.request
 
 from . import config
+
+# 全局 socket 超时兜底：urllib 的 timeout 参数只覆盖 socket 读写，
+# DNS 解析（getaddrinfo）不生效；设置默认超时防止 DNS/连接层永久卡死
+# 导致 ThreadPoolExecutor 的 shutdown(wait=True) 死锁、界面进度条永远转圈。
+socket.setdefaulttimeout(15)
 
 UA = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
@@ -110,14 +116,14 @@ def _fetch_item_tags(refresh: bool = False) -> dict:
     for t in first:
         tags[t["id"]] = [t.get("name"), t.get("count", 0)]
     if total_pages > 1:
-        from concurrent.futures import ThreadPoolExecutor
+        from concurrent.futures import ThreadPoolExecutor, TimeoutError as FutureTimeout
         with ThreadPoolExecutor(max_workers=6) as ex:
             futs = [ex.submit(_get_tags_page, p) for p in range(2, min(total_pages, 40) + 1)]
             for fu in futs:
                 try:
-                    for t in fu.result():
+                    for t in fu.result(timeout=20):
                         tags[t["id"]] = [t.get("name"), t.get("count", 0)]
-                except FetchError:
+                except Exception:
                     continue
     config.ensure_dirs()
     with open(config.TAGS_CACHE_PATH, "w", encoding="utf-8") as f:
@@ -136,6 +142,44 @@ def _fetch_codex_items(refresh: bool = False) -> list:
         json.dump(data, f, ensure_ascii=False)
     config.invalidate(config.CODEX_CACHE_PATH)
     return data
+
+
+def _merge_gamedata_meta(items: dict):
+    """从 GameData.db 补全英雄物品元数据（heroes/size/tags/startingTier）。
+
+    为什么需要：howbazaar.gg / 攻略站对新英雄（Karnok 等）的物品只收录了
+    裸名称（无英雄归属/尺寸/稀有度），导致推荐排序与商店匹配失效。
+    GameData.db（游戏缓存）含完整元数据，但 fetch_items 每次重建 items.json
+    会冲掉手工合并的结果，因此把补全做成 fetch_items 的固定步骤（幂等）。
+
+    只补 heroes/size/tags/startingTier/id 字段；不覆盖 nameCn
+    （zh-CN.bytes 的 hash 映射有偏差，中文名以 codex/官方数据为准）。
+    """
+    if not items:
+        return items
+    try:
+        d = config.load_json(os.path.join(config.DATA_DIR, "gamedata_items_extract.json")) or {}
+    except Exception:
+        return items
+    gd = d.get("items") or {}
+    if not gd:
+        return items
+    # 键兼容：extract 用 en.lower() 作 key，items 用 normalize_name
+    merged = 0
+    for en_low, meta in gd.items():
+        key = normalize_name(meta.get("name") or en_low)
+        it = items.get(key)
+        if it is None:
+            continue
+        changed = False
+        for field in ("size", "startingTier", "tags", "heroes", "id"):
+            val = meta.get(field)
+            if val and not it.get(field):
+                it[field] = val
+                changed = True
+        if changed:
+            merged += 1
+    return items
 
 
 def _merge_cn_names(items: dict, codex: list):
@@ -203,6 +247,8 @@ def fetch_items(refresh: bool = False) -> dict:
         _merge_cn_names(items, _fetch_codex_items(refresh))
     except FetchError:
         pass
+    # 从 GameData.db 补全英雄物品元数据（Karnok 等新英雄，幂等）
+    _merge_gamedata_meta(items)
     config.ensure_dirs()
     with open(config.ITEMS_PATH, "w", encoding="utf-8") as f:
         json.dump(items, f, ensure_ascii=False, indent=1)
@@ -269,7 +315,10 @@ def fetch_heroes(refresh: bool = False) -> dict:
     with ThreadPoolExecutor(max_workers=6) as ex:
         results = [ex.submit(_fetch_one, h) for h in HEROES]
         for fu in results:
-            hero, res = fu.result()
+            try:
+                hero, res = fu.result(timeout=20)
+            except Exception:
+                continue
             if not res:
                 continue
             # 优先 <hero>-builds 分类（实际存放流派）；其次 slug==hero 且有帖子数的分类
@@ -332,6 +381,17 @@ def fetch_builds(hero: str, refresh: bool = False) -> list:
     if not refresh and cache:
         return cache
 
+    # 双龙（dragons）在攻略站没有分类（该站只收录老英雄）：
+    # 返回空列表而不是报错，双龙攻略由 qiubot 天梯数据提供。
+    if hero == "dragons":
+        config.ensure_dirs()
+        all_b = config.load_json(config.BUILDS_PATH) or {}
+        all_b.setdefault("dragons", [])
+        with open(config.BUILDS_PATH, "w", encoding="utf-8") as f:
+            json.dump(all_b, f, ensure_ascii=False, indent=1)
+        config.invalidate(config.BUILDS_PATH)
+        return []
+
     heroes = get_heroes()
     info = heroes.get(hero)
     if not info:
@@ -363,13 +423,13 @@ def fetch_builds(hero: str, refresh: bool = False) -> list:
     if first:
         posts.extend(first)
     if total_pages > 1:
-        from concurrent.futures import ThreadPoolExecutor
+        from concurrent.futures import ThreadPoolExecutor, TimeoutError as FutureTimeout
         with ThreadPoolExecutor(max_workers=6) as ex:
             futs = [ex.submit(_get_posts_page, p) for p in range(2, min(total_pages, 30) + 1)]
             for fu in futs:
                 try:
-                    posts.extend(fu.result())
-                except FetchError:
+                    posts.extend(fu.result(timeout=20))
+                except Exception:
                     continue
 
     # tag id -> 物品名（分块并发）
@@ -377,15 +437,15 @@ def fetch_builds(hero: str, refresh: bool = False) -> list:
     tagmap = {}
     chunks = [tag_ids[i:i + 90] for i in range(0, len(tag_ids), 90)]
     if chunks:
-        from concurrent.futures import ThreadPoolExecutor
+        from concurrent.futures import ThreadPoolExecutor, TimeoutError as FutureTimeout
         with ThreadPoolExecutor(max_workers=6) as ex:
             futs = [ex.submit(_http_get_json,
                               f"{WP_BASE}/tags?include={','.join(map(str, c))}&per_page=100&_fields=id,name")
                     for c in chunks]
             for fu in futs:
                 try:
-                    tagmap.update({t["id"]: t["name"] for t in fu.result()})
-                except FetchError:
+                    tagmap.update({t["id"]: t["name"] for t in fu.result(timeout=20)})
+                except Exception:
                     pass
 
     # category id -> 流派类型（分块并发）
@@ -393,15 +453,15 @@ def fetch_builds(hero: str, refresh: bool = False) -> list:
     catmap = {}
     chunks = [cat_ids[i:i + 90] for i in range(0, len(cat_ids), 90)]
     if chunks:
-        from concurrent.futures import ThreadPoolExecutor
+        from concurrent.futures import ThreadPoolExecutor, TimeoutError as FutureTimeout
         with ThreadPoolExecutor(max_workers=6) as ex:
             futs = [ex.submit(_http_get_json,
                               f"{WP_BASE}/categories?include={','.join(map(str, c))}&per_page=100&_fields=id,name,slug")
                     for c in chunks]
             for fu in futs:
                 try:
-                    catmap.update({c["id"]: c["name"] for c in fu.result()})
-                except FetchError:
+                    catmap.update({c["id"]: c["name"] for c in fu.result(timeout=20)})
+                except Exception:
                     pass
 
     builds = []

@@ -1114,7 +1114,9 @@
   "heroes": [
    "Stelle"
   ],
-  "tags": [],
+  "tags": [
+   "Tool"
+  ],
   "startingTier": "Silver",
   "tooltips": [
    "Cooldown 9 seconds",
@@ -11291,7 +11293,9 @@
   "heroes": [
    "Stelle"
   ],
-  "tags": [],
+  "tags": [
+   "Tech"
+  ],
   "startingTier": "Bronze",
   "tooltips": [
    "Cooldown 2 seconds",
@@ -11710,7 +11714,9 @@
   "heroes": [
    "Pygmalien"
   ],
-  "tags": [],
+  "tags": [
+   "Instrument"
+  ],
   "startingTier": "Bronze",
   "tooltips": [
    "Cooldown 5 seconds",
@@ -21049,7 +21055,9 @@
   "heroes": [
    "Vanessa"
   ],
-  "tags": [],
+  "tags": [
+   "Instrument"
+  ],
   "startingTier": "Gold",
   "tooltips": [
    "When you use a Friend, Haste it for 2 second(s).",
@@ -29981,7 +29989,9 @@
   "heroes": [
    "Mak"
   ],
-  "tags": [],
+  "tags": [
+   "Trap"
+  ],
   "startingTier": "Silver",
   "tooltips": [
    "Cooldown 5 seconds",
@@ -30613,7 +30623,9 @@
   "heroes": [
    "Vanessa"
   ],
-  "tags": [],
+  "tags": [
+   "Trap"
+  ],
   "startingTier": "Gold",
   "tooltips": [
    "When an enemy uses an item, Slow it for 2 second(s)."
@@ -32919,7 +32931,9 @@
   "heroes": [
    "Common"
   ],
-  "tags": [],
+  "tags": [
+   "Instrument"
+  ],
   "startingTier": "Gold",
   "tooltips": [
    "Cooldown 7 seconds",
@@ -32947,191 +32961,312 @@
   "name": "Flying Squirrel",
   "source": "buildsite",
   "build_count": 66,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Friend"
+  ],
   "tooltips": [],
-  "nameCn": "飞鼠"
+  "nameCn": "飞鼠",
+  "startingTier": "Bronze",
+  "id": "826bc5e7-6342-4e8b-9143-9090d91453da"
  },
  "waterskin": {
   "name": "Waterskin",
   "source": "buildsite",
   "build_count": 44,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Food"
+  ],
   "tooltips": [],
-  "nameCn": "水囊"
+  "nameCn": "水囊",
+  "startingTier": "Bronze",
+  "id": "3c9438a9-78a6-4cb3-b1d8-a6410693a879"
  },
  "hunting hawk": {
   "name": "Hunting Hawk",
   "source": "buildsite",
   "build_count": 39,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Medium",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Weapon",
+   "Friend"
+  ],
   "tooltips": [],
-  "nameCn": "猎鹰"
+  "nameCn": "猎鹰",
+  "startingTier": "Bronze",
+  "id": "0941d7dd-1264-42c5-b334-6cc5d694571b"
  },
  "dryad": {
   "name": "Dryad",
   "source": "buildsite",
   "build_count": 35,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Medium",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Friend"
+  ],
   "tooltips": [],
-  "nameCn": "树精"
+  "nameCn": "树精",
+  "startingTier": "Bronze",
+  "id": "cda40a45-8703-4347-8f4e-7fd460b2ac57"
  },
  "chains": {
   "name": "Chains",
   "source": "buildsite",
   "build_count": 32,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Tool"
+  ],
   "tooltips": [],
-  "nameCn": "锁链"
+  "nameCn": "锁链",
+  "startingTier": "Bronze",
+  "id": "7d718c5d-e50e-46dd-ada7-f3eb0f8a16b2"
  },
  "messenger sparrow": {
   "name": "Messenger Sparrow",
   "source": "buildsite",
   "build_count": 30,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Friend"
+  ],
   "tooltips": [],
-  "nameCn": "信使麻雀"
+  "nameCn": "信使麻雀",
+  "startingTier": "Silver",
+  "id": "4f5887cd-a382-40aa-adb0-e9df7f960857"
  },
  "snow wisp": {
   "name": "Snow Wisp",
   "source": "buildsite",
   "build_count": 29,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Friend"
+  ],
   "tooltips": [],
-  "nameCn": "雪魂精灵"
+  "nameCn": "雪魂精灵",
+  "startingTier": "Silver",
+  "id": "fb56565d-1635-4199-84b1-8ccb4d97bb85"
  },
  "tinderbox": {
   "name": "Tinderbox",
   "source": "buildsite",
   "build_count": 27,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Tool"
+  ],
   "tooltips": [],
-  "nameCn": "火绒盒"
+  "nameCn": "火绒盒",
+  "startingTier": "Bronze",
+  "id": "9dce3040-6929-4c98-b88f-ee5c953d5dec"
  },
  "firefly lantern": {
   "name": "Firefly Lantern",
   "source": "buildsite",
   "build_count": 22,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Tool",
+   "Friend"
+  ],
   "tooltips": [],
-  "nameCn": "萤火灯笼"
+  "nameCn": "萤火灯笼",
+  "startingTier": "Bronze",
+  "id": "82cdc29a-cb0e-40e4-b2b8-d4ea79d3555f"
  },
  "stretch pants": {
   "name": "Stretch Pants",
   "source": "buildsite",
   "build_count": 21,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Medium",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Apparel"
+  ],
   "tooltips": [],
-  "nameCn": "弹力裤"
+  "nameCn": "弹力裤",
+  "startingTier": "Bronze",
+  "id": "cb16b205-785f-4ebe-80ae-c69f95942023"
  },
  "moon orb": {
   "name": "Moon Orb",
   "source": "buildsite",
   "build_count": 20,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Common"
+  ],
+  "tags": [
+   "Relic"
+  ],
   "tooltips": [],
-  "nameCn": "月光宝珠"
+  "nameCn": "月光宝珠",
+  "startingTier": "Diamond",
+  "id": "d0b0c34c-f616-4a51-a0f4-fe63216cf8af"
  },
  "bat": {
   "name": "Bat",
   "source": "buildsite",
   "build_count": 20,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Friend",
+   "Weapon"
+  ],
   "tooltips": [],
-  "nameCn": "蝙蝠"
+  "nameCn": "蝙蝠",
+  "startingTier": "Silver",
+  "id": "f7da5278-8608-4161-a8cd-938c600e645a"
  },
  "beast tooth": {
   "name": "Beast Tooth",
   "source": "buildsite",
   "build_count": 17,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Relic"
+  ],
   "tooltips": [],
-  "nameCn": "兽牙"
+  "nameCn": "兽牙",
+  "startingTier": "Bronze",
+  "id": "55040479-7f35-4751-9f10-1403d09af1dd"
  },
  "karst": {
   "name": "Karst",
   "source": "buildsite",
   "build_count": 16,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Large",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Property"
+  ],
   "tooltips": [],
-  "nameCn": "喀斯特"
+  "nameCn": "喀斯特",
+  "startingTier": "Silver",
+  "id": "1bfdb3c5-dece-4a67-a9ed-255fbc060f4e"
  },
  "hunters boots": {
   "name": "Hunter's Boots",
   "source": "buildsite",
   "build_count": 16,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Medium",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Apparel"
+  ],
   "tooltips": [],
-  "nameCn": "猎人之靴"
+  "nameCn": "猎人之靴",
+  "startingTier": "Gold",
+  "id": "fea2f5a5-48c7-42c0-8836-1ea805cea768"
  },
  "night vision": {
   "name": "Night Vision",
   "source": "buildsite",
   "build_count": 16,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Apparel"
+  ],
   "tooltips": [],
-  "nameCn": "夜视仪"
+  "nameCn": "夜视仪",
+  "startingTier": "Gold",
+  "id": "3c265982-4144-44de-bf69-2d86c137de20"
  },
  "beast call": {
   "name": "Beast Call",
   "source": "buildsite",
   "build_count": 15,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Tool",
+   "Instrument"
+  ],
   "tooltips": [],
-  "nameCn": "兽笛"
+  "nameCn": "兽笛",
+  "startingTier": "Silver",
+  "id": "84f2a5ad-fc48-4763-bfc8-8919a9369f9c"
  },
  "anaconda": {
   "name": "Anaconda",
   "source": "buildsite",
   "build_count": 15,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Large",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Friend",
+   "Weapon",
+   "Vehicle",
+   "Aquatic"
+  ],
   "tooltips": [],
-  "nameCn": "巨蟒"
+  "nameCn": "巨蟒",
+  "startingTier": "Gold",
+  "id": "c39c18f9-fe1b-4329-af69-ede09a5da58b"
  },
  "meat": {
   "name": "Meat",
   "source": "buildsite",
   "build_count": 15,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Food"
+  ],
   "tooltips": [],
-  "nameCn": "鲜肉"
+  "nameCn": "鲜肉",
+  "startingTier": "Bronze",
+  "id": "19e85fa6-95a1-46bd-9ac9-37ad71861475"
  },
  "giant ice club": {
   "name": "Giant Ice Club",
@@ -33147,81 +33282,133 @@
   "name": "Signal Fire",
   "source": "buildsite",
   "build_count": 14,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Medium",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Tool"
+  ],
   "tooltips": [],
-  "nameCn": "烽火台"
+  "nameCn": "烽火台",
+  "startingTier": "Silver",
+  "id": "b77bccff-153d-4bb6-bdc0-93f049dea437"
  },
  "hunting knife": {
   "name": "Hunting Knife",
   "source": "buildsite",
   "build_count": 14,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Weapon",
+   "Tool"
+  ],
   "tooltips": [],
-  "nameCn": "猎刀"
+  "nameCn": "猎刀",
+  "startingTier": "Bronze",
+  "id": "9f098979-e499-406c-a6a1-2bc98e88afab"
  },
  "fogshroom": {
   "name": "Fogshroom",
   "source": "buildsite",
   "build_count": 14,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Food"
+  ],
   "tooltips": [],
-  "nameCn": "雾菇"
+  "nameCn": "雾菇",
+  "startingTier": "Gold",
+  "id": "15d84898-4217-4bc3-ae12-7bd70641e646"
  },
  "flying fish": {
   "name": "Flying Fish",
   "source": "buildsite",
   "build_count": 14,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Vanessa"
+  ],
+  "tags": [
+   "Aquatic",
+   "Friend",
+   "Weapon"
+  ],
   "tooltips": [],
-  "nameCn": "飞鱼"
+  "nameCn": "飞鱼",
+  "startingTier": "Bronze",
+  "id": "4caeadbe-7637-4e40-805d-39d4bfc08816"
  },
  "hunters sled": {
   "name": "Hunter's Sled",
   "source": "buildsite",
   "build_count": 13,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Medium",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Vehicle"
+  ],
   "tooltips": [],
-  "nameCn": "猎人雪橇"
+  "nameCn": "猎人雪橇",
+  "startingTier": "Silver",
+  "id": "035fb538-1939-49de-8219-b6557962f054"
  },
  "caustic solvent": {
   "name": "Caustic Solvent",
   "source": "buildsite",
   "build_count": 13,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Potion"
+  ],
   "tooltips": [],
-  "nameCn": "腐蚀溶剂"
+  "nameCn": "腐蚀溶剂",
+  "startingTier": "Silver",
+  "id": "b77984de-50e8-4fe6-a8c8-65939fba140e"
  },
  "burn scar": {
   "name": "Burn Scar",
   "source": "buildsite",
   "build_count": 13,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Medium",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Property"
+  ],
   "tooltips": [],
-  "nameCn": "灼烧疤痕"
+  "nameCn": "灼烧疤痕",
+  "startingTier": "Silver",
+  "id": "2d37bcc5-f9af-4eb4-b5cd-5bc89ededab1"
  },
  "wildroot amulet": {
   "name": "Wildroot Amulet",
   "source": "buildsite",
   "build_count": 13,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Relic",
+   "Food"
+  ],
   "tooltips": [],
-  "nameCn": "野根护符"
+  "nameCn": "野根护符",
+  "startingTier": "Bronze",
+  "id": "4d31a8ff-2706-43c9-91f4-ae72d2340efc"
  },
  "powder flask": {
   "name": "Powder Flask",
@@ -33247,31 +33434,51 @@
   "name": "Wolf",
   "source": "buildsite",
   "build_count": 12,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Medium",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Weapon",
+   "Friend"
+  ],
   "tooltips": [],
-  "nameCn": "狼"
+  "nameCn": "狼",
+  "startingTier": "Silver",
+  "id": "58b1a5a2-9c9e-4e05-b5e5-ca7c7ddad508"
  },
  "shotgun": {
   "name": "Shotgun",
   "source": "buildsite",
   "build_count": 12,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Medium",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Weapon"
+  ],
   "tooltips": [],
-  "nameCn": "霰弹枪"
+  "nameCn": "霰弹枪",
+  "startingTier": "Bronze",
+  "id": "ad6b3e38-a81b-48a4-b445-679baa0f6b49"
  },
  "trapvine": {
   "name": "Trapvine",
   "source": "buildsite",
   "build_count": 12,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Large",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Friend",
+   "Trap"
+  ],
   "tooltips": [],
-  "nameCn": "陷阱藤"
+  "nameCn": "陷阱藤",
+  "startingTier": "Gold",
+  "id": "0f878177-bec7-4698-b834-0f37ef332488"
  },
  "blue piggles": {
   "name": "Blue Piggles",
@@ -33287,151 +33494,248 @@
   "name": "Wild Boar",
   "source": "buildsite",
   "build_count": 11,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Medium",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Weapon",
+   "Friend"
+  ],
   "tooltips": [],
-  "nameCn": "野猪"
+  "nameCn": "野猪",
+  "startingTier": "Silver",
+  "id": "e01ac7ab-1ad5-4235-81b4-44d057878953"
  },
  "hunters journal": {
   "name": "Hunter's Journal",
   "source": "buildsite",
   "build_count": 11,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Tool"
+  ],
   "tooltips": [],
-  "nameCn": "猎人日志"
+  "nameCn": "猎人日志",
+  "startingTier": "Bronze",
+  "id": "b8167003-4e4c-4405-8986-0efaaf77665f"
  },
  "boa constrictor": {
   "name": "Boa Constrictor",
   "source": "buildsite",
   "build_count": 11,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Medium",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Weapon",
+   "Friend"
+  ],
   "tooltips": [],
-  "nameCn": "蚺蛇"
+  "nameCn": "蚺蛇",
+  "startingTier": "Silver",
+  "id": "7a504eff-6d75-40fd-b048-70a6d69dd6d4"
  },
  "tent": {
   "name": "Tent",
   "source": "buildsite",
   "build_count": 11,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Medium",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Tool",
+   "Property"
+  ],
   "tooltips": [],
-  "nameCn": "帐篷"
+  "nameCn": "帐篷",
+  "startingTier": "Silver",
+  "id": "24433bda-f934-4fab-b0a7-1842e2ca195f"
  },
  "binoculars": {
   "name": "Binoculars",
   "source": "buildsite",
   "build_count": 10,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Stelle"
+  ],
+  "tags": [
+   "Tool"
+  ],
   "tooltips": [],
-  "nameCn": "望远镜"
+  "nameCn": "望远镜",
+  "startingTier": "Bronze",
+  "id": "c6433adf-cebc-4b6a-9172-3d7b36f6b428"
  },
  "warding glyphs": {
   "name": "Warding Glyphs",
   "source": "buildsite",
   "build_count": 10,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Relic",
+   "Apparel"
+  ],
   "tooltips": [],
-  "nameCn": "守护符文"
+  "nameCn": "守护符文",
+  "startingTier": "Bronze",
+  "id": "02859d88-e334-45a9-8483-597d744cb7c7"
  },
  "aurora vista": {
   "name": "Aurora Vista",
   "source": "buildsite",
   "build_count": 10,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Large",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Property"
+  ],
   "tooltips": [],
-  "nameCn": "极光之景"
+  "nameCn": "极光之景",
+  "startingTier": "Silver",
+  "id": "30b4548a-589b-48d0-a039-21766b72635c"
  },
  "chaff": {
   "name": "Chaff",
   "source": "buildsite",
   "build_count": 9,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Dooley"
+  ],
+  "tags": [
+   "Tech"
+  ],
   "tooltips": [],
-  "nameCn": ""
+  "nameCn": "",
+  "startingTier": "Bronze",
+  "id": "a5e0c248-624f-41dc-a33d-df8761f65642"
  },
  "spear": {
   "name": "Spear",
   "source": "buildsite",
   "build_count": 9,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Medium",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Weapon"
+  ],
   "tooltips": [],
-  "nameCn": "长矛"
+  "nameCn": "长矛",
+  "startingTier": "Bronze",
+  "id": "a4f9a8ea-7955-4285-8489-7c94c439018b"
  },
  "unibou": {
   "name": "Unibou",
   "source": "buildsite",
   "build_count": 9,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Medium",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Friend"
+  ],
   "tooltips": [],
-  "nameCn": "独角驯"
+  "nameCn": "独角驯",
+  "startingTier": "Bronze",
+  "id": "7317d6a2-adea-442c-9e97-7f7bbf64ae99"
  },
  "runed amulet": {
   "name": "Runed Amulet",
   "source": "buildsite",
   "build_count": 9,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Apparel",
+   "Relic"
+  ],
   "tooltips": [],
-  "nameCn": "符文护符"
+  "nameCn": "符文护符",
+  "startingTier": "Bronze",
+  "id": "459dd1f7-285e-4172-b065-1fabf65476fb"
  },
  "black mamba": {
   "name": "Black Mamba",
   "source": "buildsite",
   "build_count": 9,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Friend"
+  ],
   "tooltips": [],
-  "nameCn": "黑曼巴"
+  "nameCn": "黑曼巴",
+  "startingTier": "Bronze",
+  "id": "179f4d08-9001-4216-a46d-6600e2d0b2fc"
  },
  "log trap": {
   "name": "Log Trap",
   "source": "buildsite",
   "build_count": 9,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Medium",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Weapon",
+   "Tool",
+   "Trap"
+  ],
   "tooltips": [],
-  "nameCn": "原木陷阱"
+  "nameCn": "原木陷阱",
+  "startingTier": "Gold",
+  "id": "8aaaa5fa-0145-4861-afa3-43cae80b0a3c"
  },
  "flame sigil": {
   "name": "Flame Sigil",
   "source": "buildsite",
   "build_count": 9,
-  "size": null,
-  "heroes": [],
+  "size": "Medium",
+  "heroes": [
+   "Karnok"
+  ],
   "tags": [],
   "tooltips": [],
-  "nameCn": "烈焰符印"
+  "nameCn": "烈焰符印",
+  "startingTier": "Gold",
+  "id": "904ffad8-86e3-4e3b-8a26-723604cc4f0e"
  },
  "marlon": {
   "name": "Marlon",
   "source": "buildsite",
   "build_count": 9,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Medium",
+  "heroes": [
+   "Vanessa"
+  ],
+  "tags": [
+   "Aquatic",
+   "Friend",
+   "Weapon"
+  ],
   "tooltips": [],
-  "nameCn": "马龙鱼"
+  "nameCn": "马龙鱼",
+  "startingTier": "Bronze",
+  "id": "3f867017-c026-412d-99f7-67ca26092e7a"
  },
  "nanobots": {
   "name": "Nanobots",
@@ -33447,71 +33751,115 @@
   "name": "Honey Badger",
   "source": "buildsite",
   "build_count": 8,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Medium",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Weapon",
+   "Friend"
+  ],
   "tooltips": [],
-  "nameCn": "蜜獾"
+  "nameCn": "蜜獾",
+  "startingTier": "Bronze",
+  "id": "b9a59fba-b266-478d-8bef-ae183e4f79d5"
  },
  "trail markers": {
   "name": "Trail Markers",
   "source": "buildsite",
   "build_count": 8,
-  "size": null,
-  "heroes": [],
+  "size": "Small",
+  "heroes": [
+   "Karnok"
+  ],
   "tags": [],
   "tooltips": [],
-  "nameCn": "路径标记"
+  "nameCn": "路径标记",
+  "startingTier": "Gold",
+  "id": "a4281e9f-7889-4ac1-a140-9152ab54bc6b"
  },
  "silver stake": {
   "name": "Silver Stake",
   "source": "buildsite",
   "build_count": 8,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Weapon",
+   "Relic"
+  ],
   "tooltips": [],
-  "nameCn": "银制尖桩"
+  "nameCn": "银制尖桩",
+  "startingTier": "Bronze",
+  "id": "3d7961f0-62fa-4b20-94a0-9034ccda129c"
  },
  "runed bracelet": {
   "name": "Runed Bracelet",
   "source": "buildsite",
   "build_count": 8,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Apparel",
+   "Relic"
+  ],
   "tooltips": [],
-  "nameCn": "符文手镯"
+  "nameCn": "符文手镯",
+  "startingTier": "Bronze",
+  "id": "576c25ce-4202-4416-9ae9-21052502db93"
  },
  "adrenaline shot": {
   "name": "Adrenaline Shot",
   "source": "buildsite",
   "build_count": 8,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Potion"
+  ],
   "tooltips": [],
-  "nameCn": "肾上腺素注射"
+  "nameCn": "肾上腺素注射",
+  "startingTier": "Bronze",
+  "id": "ff5c6ad0-9b05-48af-9e90-6ebd0e73ffa7"
  },
  "frog hollow": {
   "name": "Frog Hollow",
   "source": "buildsite",
   "build_count": 8,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Medium",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Property"
+  ],
   "tooltips": [],
-  "nameCn": "蛙鸣洞穴"
+  "nameCn": "蛙鸣洞穴",
+  "startingTier": "Silver",
+  "id": "0df9aa59-6b34-4968-94f0-98af5e22aa7a"
  },
  "broken bottle": {
   "name": "Broken Bottle",
   "source": "buildsite",
   "build_count": 8,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Mak"
+  ],
+  "tags": [
+   "Potion",
+   "Weapon"
+  ],
   "tooltips": [],
-  "nameCn": "碎瓶"
+  "nameCn": "碎瓶",
+  "startingTier": "Bronze",
+  "id": "f5ab9d64-2ba8-4210-9cf7-4564413b8d00"
  },
  "orange piggles": {
   "name": "Orange Piggles",
@@ -33527,141 +33875,228 @@
   "name": "Torch",
   "source": "buildsite",
   "build_count": 7,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Tool"
+  ],
   "tooltips": [],
-  "nameCn": "火把"
+  "nameCn": "火把",
+  "startingTier": "Bronze",
+  "id": "7206e518-ec85-4524-aa55-ce98fa2f3fad"
  },
  "outlands terror": {
   "name": "Outlands Terror",
   "source": "buildsite",
   "build_count": 7,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Large",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Weapon",
+   "Friend"
+  ],
   "tooltips": [],
-  "nameCn": "荒原恐兽"
+  "nameCn": "荒原恐兽",
+  "startingTier": "Silver",
+  "id": "0660ace1-2d6a-4f7b-bfc2-05e8582d27b9"
  },
  "great eagle": {
   "name": "Great Eagle",
   "source": "buildsite",
   "build_count": 7,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Large",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Weapon",
+   "Vehicle",
+   "Friend"
+  ],
   "tooltips": [],
-  "nameCn": "巨鹰"
+  "nameCn": "巨鹰",
+  "startingTier": "Gold",
+  "id": "e69fe274-6cdf-484e-887c-cc431ad999d8"
  },
  "warpaint": {
   "name": "Warpaint",
   "source": "buildsite",
   "build_count": 7,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Apparel"
+  ],
   "tooltips": [],
-  "nameCn": "战纹涂料"
+  "nameCn": "战纹涂料",
+  "startingTier": "Silver",
+  "id": "153dfd6d-7dc8-4386-9703-ea6c99f92d4a"
  },
  "worry wart": {
   "name": "Worry Wart",
   "source": "buildsite",
   "build_count": 7,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Medium",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Friend"
+  ],
   "tooltips": [],
-  "nameCn": "忧虑疣蛙"
+  "nameCn": "忧虑疣蛙",
+  "startingTier": "Bronze",
+  "id": "6c80dddf-31ea-4e2a-8d7a-78c5cf672597"
  },
  "tranquilizer dart": {
   "name": "Tranquilizer Dart",
   "source": "buildsite",
   "build_count": 7,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Tool"
+  ],
   "tooltips": [],
-  "nameCn": "麻醉镖"
+  "nameCn": "麻醉镖",
+  "startingTier": "Silver",
+  "id": "166cce40-27ab-4bd4-8719-f649b1c0b8d8"
  },
  "flare": {
   "name": "Flare",
   "source": "buildsite",
   "build_count": 7,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Tool"
+  ],
   "tooltips": [],
-  "nameCn": "信号弹"
+  "nameCn": "信号弹",
+  "startingTier": "Silver",
+  "id": "ecb5ddef-0bac-4ba1-a8f4-88bc8dfa7572"
  },
  "forest cloak": {
   "name": "Forest Cloak",
   "source": "buildsite",
   "build_count": 7,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Medium",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Apparel"
+  ],
   "tooltips": [],
-  "nameCn": "森林斗篷"
+  "nameCn": "森林斗篷",
+  "startingTier": "Silver",
+  "id": "f718a14b-e8bd-4ee6-b9a9-63f15de5f242"
  },
  "machete": {
   "name": "Machete",
   "source": "buildsite",
   "build_count": 7,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Weapon",
+   "Tool"
+  ],
   "tooltips": [],
-  "nameCn": "砍刀"
+  "nameCn": "砍刀",
+  "startingTier": "Silver",
+  "id": "05a83727-cfd8-4f9b-a109-e720714de70b"
  },
  "vengeful sigil": {
   "name": "Vengeful Sigil",
   "source": "buildsite",
   "build_count": 7,
-  "size": null,
-  "heroes": [],
+  "size": "Medium",
+  "heroes": [
+   "Karnok"
+  ],
   "tags": [],
   "tooltips": [],
-  "nameCn": "复仇符印"
+  "nameCn": "复仇符印",
+  "startingTier": "Silver",
+  "id": "05a32402-598c-4bb5-a280-1a84f0ab84fa"
  },
  "trinet": {
   "name": "Tri-Net",
   "source": "buildsite",
   "build_count": 6,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Medium",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Weapon",
+   "Tool"
+  ],
   "tooltips": [],
-  "nameCn": "三叉网"
+  "nameCn": "三叉网",
+  "startingTier": "Bronze",
+  "id": "3be07dec-5176-43ad-adae-3ee573a89f0a"
  },
  "fairy circle": {
   "name": "Fairy Circle",
   "source": "buildsite",
   "build_count": 6,
-  "size": null,
-  "heroes": [],
+  "size": "Medium",
+  "heroes": [
+   "Common"
+  ],
   "tags": [],
   "tooltips": [],
-  "nameCn": "仙女环"
+  "nameCn": "仙女环",
+  "startingTier": "Bronze",
+  "id": "e54908bc-bf2d-4aac-93c3-393be464558a"
  },
  "fairies": {
   "name": "Fairies",
   "source": "buildsite",
   "build_count": 6,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Friend"
+  ],
   "tooltips": [],
-  "nameCn": "仙灵"
+  "nameCn": "仙灵",
+  "startingTier": "Silver",
+  "id": "dd1a8882-4326-4545-88c7-e063d789f4ad"
  },
  "cora": {
   "name": "C.O.R.A.",
   "source": "buildsite",
   "build_count": 6,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Large",
+  "heroes": [
+   "Dooley"
+  ],
+  "tags": [
+   "Core",
+   "Tech",
+   "Weapon"
+  ],
   "tooltips": [],
-  "nameCn": "C.O.R.A."
+  "nameCn": "C.O.R.A.",
+  "startingTier": "Gold",
+  "id": "7033da61-20af-46ab-bd14-0bbe91ec6af5"
  },
  "zoracid": {
   "name": "zoracid",
@@ -33677,91 +34112,150 @@
   "name": "Epsilon ray",
   "source": "buildsite",
   "build_count": 5,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Dooley"
+  ],
+  "tags": [
+   "Ray",
+   "Tech"
+  ],
   "tooltips": [],
-  "nameCn": "艾普西隆射线"
+  "nameCn": "艾普西隆射线",
+  "startingTier": "Silver",
+  "id": "9d871e47-c760-42aa-84ab-995f5bf3f394"
  },
  "pocket knife": {
   "name": "Pocket Knife",
   "source": "buildsite",
   "build_count": 5,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Weapon",
+   "Tool"
+  ],
   "tooltips": [],
-  "nameCn": "袖珍飞刀"
+  "nameCn": "袖珍飞刀",
+  "startingTier": "Bronze",
+  "id": "a14e3bea-96b9-43de-9455-99393769b356"
  },
  "giant sling": {
   "name": "Giant Sling",
   "source": "buildsite",
   "build_count": 5,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Large",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Weapon"
+  ],
   "tooltips": [],
-  "nameCn": "巨型投石索"
+  "nameCn": "巨型投石索",
+  "startingTier": "Silver",
+  "id": "d458042a-bbfa-4ac9-86cf-5a709ac814ae"
  },
  "boar mask": {
   "name": "Boar Mask",
   "source": "buildsite",
   "build_count": 5,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Medium",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Apparel",
+   "Weapon"
+  ],
   "tooltips": [],
-  "nameCn": "野猪面具"
+  "nameCn": "野猪面具",
+  "startingTier": "Silver",
+  "id": "50039402-e84e-4698-90fa-7cbaffca9ce8"
  },
  "bear mask": {
   "name": "Bear Mask",
   "source": "buildsite",
   "build_count": 5,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Medium",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Apparel"
+  ],
   "tooltips": [],
-  "nameCn": "熊面具"
+  "nameCn": "熊面具",
+  "startingTier": "Silver",
+  "id": "6209e47a-d5c6-4ecb-b6e3-e41787b13345"
  },
  "wrist crossbow": {
   "name": "Wrist Crossbow",
   "source": "buildsite",
   "build_count": 5,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Weapon"
+  ],
   "tooltips": [],
-  "nameCn": "腕弩"
+  "nameCn": "腕弩",
+  "startingTier": "Bronze",
+  "id": "d7d8b658-789f-49b0-83fe-6106d1e2c6c4"
  },
  "wild bear": {
   "name": "Wild Bear",
   "source": "buildsite",
   "build_count": 5,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Medium",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Weapon",
+   "Friend"
+  ],
   "tooltips": [],
-  "nameCn": "野熊"
+  "nameCn": "野熊",
+  "startingTier": "Gold",
+  "id": "9d2a2c9e-19b2-48e7-b891-53d570ed171e"
  },
  "ancient locket": {
   "name": "Ancient Locket",
   "source": "buildsite",
   "build_count": 5,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Apparel",
+   "Relic"
+  ],
   "tooltips": [],
-  "nameCn": "远古挂坠"
+  "nameCn": "远古挂坠",
+  "startingTier": "Silver",
+  "id": "d641c57b-ab42-4b2f-b4f4-addd18eb7100"
  },
  "furs": {
   "name": "Furs",
   "source": "buildsite",
   "build_count": 5,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Medium",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Apparel"
+  ],
   "tooltips": [],
-  "nameCn": "皮毛"
+  "nameCn": "皮毛",
+  "startingTier": "Silver",
+  "id": "38e563e6-7420-443e-ab2f-0ae61aac1227"
  },
  "fossilized femur": {
   "name": "Fossilized Femur",
@@ -33797,11 +34291,18 @@
   "name": "Bomb Voyage",
   "source": "buildsite",
   "build_count": 4,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Medium",
+  "heroes": [
+   "Stelle"
+  ],
+  "tags": [
+   "Weapon",
+   "Vehicle"
+  ],
   "tooltips": [],
-  "nameCn": "炸裂旅程"
+  "nameCn": "炸裂旅程",
+  "startingTier": "Gold",
+  "id": "49c93b98-cd66-4d3a-923c-c4e2871e87fb"
  },
  "pastry card": {
   "name": "Pastry Card",
@@ -33817,141 +34318,223 @@
   "name": "Eagle Sigil",
   "source": "buildsite",
   "build_count": 4,
-  "size": null,
-  "heroes": [],
+  "size": "Small",
+  "heroes": [
+   "Karnok"
+  ],
   "tags": [],
   "tooltips": [],
-  "nameCn": "鹰之符印"
+  "nameCn": "鹰之符印",
+  "startingTier": "Silver",
+  "id": "5b4b3685-aa1d-477e-aed5-805813faa2b2"
  },
  "doublebladed knife": {
   "name": "Double-Bladed Knife",
   "source": "buildsite",
   "build_count": 4,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Weapon"
+  ],
   "tooltips": [],
-  "nameCn": "双刃匕首"
+  "nameCn": "双刃匕首",
+  "startingTier": "Bronze",
+  "id": "26f84927-811c-485a-b13f-0100a7e5cdd1"
  },
  "wing sigil": {
   "name": "Wing Sigil",
   "source": "buildsite",
   "build_count": 4,
-  "size": null,
-  "heroes": [],
+  "size": "Medium",
+  "heroes": [
+   "Karnok"
+  ],
   "tags": [],
   "tooltips": [],
-  "nameCn": "羽翼符印"
+  "nameCn": "羽翼符印",
+  "startingTier": "Silver",
+  "id": "9d6b3763-fd74-4d02-b9c0-56931974bfe3"
  },
  "runic claymore": {
   "name": "Runic Claymore",
   "source": "buildsite",
   "build_count": 4,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Large",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Weapon",
+   "Relic"
+  ],
   "tooltips": [],
-  "nameCn": "符文阔剑"
+  "nameCn": "符文阔剑",
+  "startingTier": "Gold",
+  "id": "94a184be-98f2-4a65-8334-e15deff2c082"
  },
  "resistance bands": {
   "name": "Resistance Bands",
   "source": "buildsite",
   "build_count": 4,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Apparel"
+  ],
   "tooltips": [],
-  "nameCn": "弹力带"
+  "nameCn": "弹力带",
+  "startingTier": "Silver",
+  "id": "b456e981-db43-4791-b364-7973221e6f03"
  },
  "security blanket": {
   "name": "Security Blanket",
   "source": "buildsite",
   "build_count": 4,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Apparel"
+  ],
   "tooltips": [],
-  "nameCn": "安心毯"
+  "nameCn": "安心毯",
+  "startingTier": "Bronze",
+  "id": "02d7a406-a6eb-4b46-8975-1f69b0fde428"
  },
  "hidden lake": {
   "name": "Hidden Lake",
   "source": "buildsite",
   "build_count": 4,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Large",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Property",
+   "Aquatic"
+  ],
   "tooltips": [],
-  "nameCn": "隐秘之湖"
+  "nameCn": "隐秘之湖",
+  "startingTier": "Silver",
+  "id": "84edf515-c3bc-43f4-becb-b53b59e4abcc"
  },
  "drowsdrop": {
   "name": "Drowsdrop",
   "source": "buildsite",
   "build_count": 4,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Potion"
+  ],
   "tooltips": [],
-  "nameCn": "昏沉滴露"
+  "nameCn": "昏沉滴露",
+  "startingTier": "Bronze",
+  "id": "a655fb50-b9e1-41ec-b658-07459014f96c"
  },
  "spiked wraps": {
   "name": "Spiked Wraps",
   "source": "buildsite",
   "build_count": 4,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Weapon",
+   "Apparel"
+  ],
   "tooltips": [],
-  "nameCn": "尖刺臂缠"
+  "nameCn": "尖刺臂缠",
+  "startingTier": "Bronze",
+  "id": "9e1173c2-c44d-4aa5-9aa3-10271be80943"
  },
  "heavy crossbow": {
   "name": "Heavy Crossbow",
   "source": "buildsite",
   "build_count": 4,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Medium",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Weapon"
+  ],
   "tooltips": [],
-  "nameCn": "重弩"
+  "nameCn": "重弩",
+  "startingTier": "Silver",
+  "id": "7a7e373f-bbbb-4085-94a8-07b4a45f9065"
  },
  "leather jacket": {
   "name": "Leather Jacket",
   "source": "buildsite",
   "build_count": 4,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Medium",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Apparel"
+  ],
   "tooltips": [],
-  "nameCn": "皮夹克"
+  "nameCn": "皮夹克",
+  "startingTier": "Gold",
+  "id": "8619fc8b-ceec-4be6-9289-8c7b6f05a631"
  },
  "pontoon skimmer": {
   "name": "Pontoon Skimmer",
   "source": "buildsite",
   "build_count": 4,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Large",
+  "heroes": [
+   "Pygmalien"
+  ],
+  "tags": [
+   "Vehicle",
+   "Aquatic"
+  ],
   "tooltips": [],
-  "nameCn": "浮筒滑翔艇"
+  "nameCn": "浮筒滑翔艇",
+  "startingTier": "Silver",
+  "id": "6b5b3ef1-d312-4cfc-8e44-a032a231e15a"
  },
  "enervating sigil": {
   "name": "Enervating Sigil",
   "source": "buildsite",
   "build_count": 4,
-  "size": null,
-  "heroes": [],
+  "size": "Medium",
+  "heroes": [
+   "Karnok"
+  ],
   "tags": [],
   "tooltips": [],
-  "nameCn": "衰弱符印"
+  "nameCn": "衰弱符印",
+  "startingTier": "Silver",
+  "id": "2e2815d0-fa7c-45ab-a0f2-65ebe1c815d8"
  },
  "cruise ship": {
   "name": "Cruise Ship",
   "source": "buildsite",
   "build_count": 4,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Large",
+  "heroes": [
+   "Stelle"
+  ],
+  "tags": [
+   "Vehicle"
+  ],
   "tooltips": [],
-  "nameCn": "游轮"
+  "nameCn": "游轮",
+  "startingTier": "Silver",
+  "id": "3132efea-ee79-4b99-b380-d0df3bf1df88"
  },
  "yellow piggles": {
   "name": "Yellow Piggles",
@@ -34017,121 +34600,200 @@
   "name": "Hunter's Axe",
   "source": "buildsite",
   "build_count": 3,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Weapon",
+   "Tool"
+  ],
   "tooltips": [],
-  "nameCn": "猎人之斧"
+  "nameCn": "猎人之斧",
+  "startingTier": "Bronze",
+  "id": "38e105eb-c5c7-484f-b7ec-f9912701d3ef"
  },
  "tree club": {
   "name": "Tree Club",
   "source": "buildsite",
   "build_count": 3,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Large",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Weapon"
+  ],
   "tooltips": [],
-  "nameCn": "树木大棒"
+  "nameCn": "树木大棒",
+  "startingTier": "Gold",
+  "id": "b57734a7-642e-4c57-861c-b8a488596047"
  },
  "bladed armor": {
   "name": "Bladed Armor",
   "source": "buildsite",
   "build_count": 3,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Medium",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Weapon",
+   "Apparel"
+  ],
   "tooltips": [],
-  "nameCn": "刃甲"
+  "nameCn": "刃甲",
+  "startingTier": "Bronze",
+  "id": "b3be5988-ed2f-4dc8-b8d2-97ba7dca0976"
  },
  "ghillie suit": {
   "name": "Ghillie Suit",
   "source": "buildsite",
   "build_count": 3,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Medium",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Apparel"
+  ],
   "tooltips": [],
-  "nameCn": "吉利服"
+  "nameCn": "吉利服",
+  "startingTier": "Silver",
+  "id": "d25ccf21-f789-4e06-8c38-b7f5f47e66af"
  },
  "rope": {
   "name": "Rope",
   "source": "buildsite",
   "build_count": 3,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Tool"
+  ],
   "tooltips": [],
-  "nameCn": "绳索"
+  "nameCn": "绳索",
+  "startingTier": "Bronze",
+  "id": "7f0520ce-77af-4a0b-b4cf-62295dbc6fa3"
  },
  "bandoleer": {
   "name": "Bandoleer",
   "source": "buildsite",
   "build_count": 3,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Medium",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Apparel"
+  ],
   "tooltips": [],
-  "nameCn": "弹药带"
+  "nameCn": "弹药带",
+  "startingTier": "Silver",
+  "id": "37c65de1-3027-43b1-923b-e9b675222123"
  },
  "assault sigil": {
   "name": "Assault Sigil",
   "source": "buildsite",
   "build_count": 3,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Medium",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Weapon"
+  ],
   "tooltips": [],
-  "nameCn": "突击符印"
+  "nameCn": "突击符印",
+  "startingTier": "Gold",
+  "id": "b3b0f6a4-bad5-49dc-a6f7-128be2565869"
  },
  "bear trap": {
   "name": "Bear Trap",
   "source": "buildsite",
   "build_count": 3,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Tool",
+   "Weapon",
+   "Trap"
+  ],
   "tooltips": [],
-  "nameCn": "捕兽夹"
+  "nameCn": "捕兽夹",
+  "startingTier": "Silver",
+  "id": "d6ae8bd6-c9c0-4e80-bcfb-fb60025e6152"
  },
  "hunters blind": {
   "name": "Hunter's Blind",
   "source": "buildsite",
   "build_count": 3,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Medium",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Property",
+   "Tool"
+  ],
   "tooltips": [],
-  "nameCn": "猎人伏击棚"
+  "nameCn": "猎人伏击棚",
+  "startingTier": "Silver",
+  "id": "947f43a6-fe93-4e55-9fda-202437f1a9d0"
  },
  "executioners cleaver": {
   "name": "Executioner's Cleaver",
   "source": "buildsite",
   "build_count": 3,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Large",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Weapon"
+  ],
   "tooltips": [],
-  "nameCn": "行刑者的斩肉刀"
+  "nameCn": "行刑者的斩肉刀",
+  "startingTier": "Silver",
+  "id": "eda078df-abe9-47d5-91e1-5fdb31190a5a"
  },
  "inertial dampener": {
   "name": "Inertial Dampener",
   "source": "buildsite",
   "build_count": 3,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Stelle"
+  ],
+  "tags": [
+   "Tech",
+   "Tool"
+  ],
   "tooltips": [],
-  "nameCn": "惯性阻尼器"
+  "nameCn": "惯性阻尼器",
+  "startingTier": "Silver",
+  "id": "7cc6a3ea-6820-43f5-80ae-135dc3e8624b"
  },
  "jetbike": {
   "name": "Jetbike",
   "source": "buildsite",
   "build_count": 3,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Large",
+  "heroes": [
+   "Vanessa"
+  ],
+  "tags": [
+   "Weapon",
+   "Vehicle"
+  ],
   "tooltips": [],
-  "nameCn": "喷射摩托"
+  "nameCn": "喷射摩托",
+  "startingTier": "Silver",
+  "id": "16b9413f-c28b-4c45-84a9-4c214cc681fd"
  },
  "shielded core": {
   "name": "Shielded Core",
@@ -34337,181 +34999,288 @@
   "name": "Dual Reaver",
   "source": "buildsite",
   "build_count": 2,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Large",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Weapon"
+  ],
   "tooltips": [],
-  "nameCn": "掠夺双刃"
+  "nameCn": "掠夺双刃",
+  "startingTier": "Silver",
+  "id": "7cfac919-7fc0-475e-91f4-3e869ec1f870"
  },
  "yarrow paste": {
   "name": "Yarrow Paste",
   "source": "buildsite",
   "build_count": 2,
-  "size": null,
-  "heroes": [],
+  "size": "Small",
+  "heroes": [
+   "Karnok"
+  ],
   "tags": [],
   "tooltips": [],
-  "nameCn": "蓍草膏药"
+  "nameCn": "蓍草膏药",
+  "startingTier": "Bronze",
+  "id": "2b66528b-f129-4593-99a7-27146a857e12"
  },
  "battle axe": {
   "name": "Battle Axe",
   "source": "buildsite",
   "build_count": 2,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Medium",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Weapon"
+  ],
   "tooltips": [],
-  "nameCn": "战斧"
+  "nameCn": "战斧",
+  "startingTier": "Bronze",
+  "id": "b86d7698-70b2-4caa-b373-2f377125d6d2"
  },
  "pauldrons": {
   "name": "Pauldrons",
   "source": "buildsite",
   "build_count": 2,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Medium",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Apparel"
+  ],
   "tooltips": [],
-  "nameCn": "肩铠"
+  "nameCn": "肩铠",
+  "startingTier": "Silver",
+  "id": "8666a1de-066f-47c4-9d9b-87eea7d9f25a"
  },
  "trapping pit": {
   "name": "Trapping Pit",
   "source": "buildsite",
   "build_count": 2,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Medium",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Property",
+   "Weapon",
+   "Trap"
+  ],
   "tooltips": [],
-  "nameCn": "陷坑"
+  "nameCn": "陷坑",
+  "startingTier": "Gold",
+  "id": "04a994d3-9aeb-4dde-8243-e954b55ada63"
  },
  "utility belt": {
   "name": "Utility Belt",
   "source": "buildsite",
   "build_count": 2,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Medium",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Apparel"
+  ],
   "tooltips": [],
-  "nameCn": "工具腰带"
+  "nameCn": "工具腰带",
+  "startingTier": "Bronze",
+  "id": "7434203a-9b5c-472e-8208-c1e17e5d7bb3"
  },
  "steel bramble": {
   "name": "Steel Bramble",
   "source": "buildsite",
   "build_count": 2,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Tool"
+  ],
   "tooltips": [],
-  "nameCn": "钢棘"
+  "nameCn": "钢棘",
+  "startingTier": "Gold",
+  "id": "dfbeb777-974b-4a66-bd35-683b859cafa7"
  },
  "bagpipes": {
   "name": "Bagpipes",
   "source": "buildsite",
   "build_count": 2,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Medium",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Tool",
+   "Instrument"
+  ],
   "tooltips": [],
-  "nameCn": "风笛"
+  "nameCn": "风笛",
+  "startingTier": "Bronze",
+  "id": "2705353a-b8ec-47f0-acd9-d641dd13d6d0"
  },
  "hunters pack": {
   "name": "Hunter's Pack",
   "source": "buildsite",
   "build_count": 2,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Medium",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Apparel"
+  ],
   "tooltips": [],
-  "nameCn": "猎人背包"
+  "nameCn": "猎人背包",
+  "startingTier": "Gold",
+  "id": "6e633f92-81a3-4157-912c-bcdb1b9e28f1"
  },
  "bear claws": {
   "name": "Bear Claws",
   "source": "buildsite",
   "build_count": 2,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Weapon"
+  ],
   "tooltips": [],
-  "nameCn": "熊爪"
+  "nameCn": "熊爪",
+  "startingTier": "Bronze",
+  "id": "d36f0ce1-98c4-4b00-8342-a6b89f142ae4"
  },
  "spiked collar": {
   "name": "Spiked Collar",
   "source": "buildsite",
   "build_count": 2,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Weapon",
+   "Apparel"
+  ],
   "tooltips": [],
-  "nameCn": "尖刺项圈"
+  "nameCn": "尖刺项圈",
+  "startingTier": "Gold",
+  "id": "430b8dce-0d95-4942-8a1a-e8da2098eab7"
  },
  "wolf mask": {
   "name": "Wolf Mask",
   "source": "buildsite",
   "build_count": 2,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Medium",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Apparel"
+  ],
   "tooltips": [],
-  "nameCn": "狼面具"
+  "nameCn": "狼面具",
+  "startingTier": "Silver",
+  "id": "22c8b252-e36d-4564-9588-06febd4b358d"
  },
  "tranquil sigil": {
   "name": "Tranquil Sigil",
   "source": "buildsite",
   "build_count": 2,
-  "size": null,
-  "heroes": [],
+  "size": "Medium",
+  "heroes": [
+   "Karnok"
+  ],
   "tags": [],
   "tooltips": [],
-  "nameCn": "宁静符印"
+  "nameCn": "宁静符印",
+  "startingTier": "Silver",
+  "id": "90b3cc1a-2251-4af7-a7c7-496aac457784"
  },
  "portable shield generator": {
   "name": "Portable Shield Generator",
   "source": "buildsite",
   "build_count": 2,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Medium",
+  "heroes": [
+   "Stelle"
+  ],
+  "tags": [
+   "Vehicle",
+   "Tech"
+  ],
   "tooltips": [],
-  "nameCn": "便携护盾发生器"
+  "nameCn": "便携护盾发生器",
+  "startingTier": "Gold",
+  "id": "f35f40ac-0d19-4fe9-8767-f6e65899ade3"
  },
  "lifting stones": {
   "name": "Lifting Stones",
   "source": "buildsite",
   "build_count": 2,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Medium",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Tool"
+  ],
   "tooltips": [],
-  "nameCn": "举重巨石"
+  "nameCn": "举重巨石",
+  "startingTier": "Bronze",
+  "id": "9046606f-3f26-4fe4-b2b3-5666839e549b"
  },
  "private jet": {
   "name": "Private Jet",
   "source": "buildsite",
   "build_count": 2,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Large",
+  "heroes": [
+   "Pygmalien"
+  ],
+  "tags": [
+   "Vehicle"
+  ],
   "tooltips": [],
-  "nameCn": "私人喷气机"
+  "nameCn": "私人喷气机",
+  "startingTier": "Silver",
+  "id": "e49c8ca8-36e9-4018-9d57-8d2c1e45920a"
  },
  "suppressor": {
   "name": "Suppressor",
   "source": "buildsite",
   "build_count": 2,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Vanessa"
+  ],
+  "tags": [
+   "Tech"
+  ],
   "tooltips": [],
-  "nameCn": ""
+  "nameCn": "",
+  "startingTier": "Silver",
+  "id": "02fa39ce-6cc0-4ad2-bd35-5c70a47354d6"
  },
  "bonfire": {
   "name": "Bonfire",
   "source": "buildsite",
   "build_count": 2,
-  "size": null,
-  "heroes": [],
+  "size": "Medium",
+  "heroes": [
+   "Vanessa"
+  ],
   "tags": [],
   "tooltips": [],
-  "nameCn": ""
+  "nameCn": "",
+  "startingTier": "Silver",
+  "id": "bbdd06b6-c45a-43b6-8f6a-2a3c87ce5880"
  },
  "propane tank": {
   "name": "Propane Tank",
@@ -35867,11 +36636,18 @@
   "name": "mixer",
   "source": "buildsite",
   "build_count": 1,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Medium",
+  "heroes": [
+   "Hero8"
+  ],
+  "tags": [
+   "Tool",
+   "Tech"
+  ],
   "tooltips": [],
-  "nameCn": ""
+  "nameCn": "",
+  "startingTier": "Diamond",
+  "id": "2746687c-9d98-4c6b-824e-8bd37405a491"
  },
  "toxic basket": {
   "name": "Toxic Basket",
@@ -36247,41 +37023,65 @@
   "name": "Wolverine",
   "source": "buildsite",
   "build_count": 1,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Medium",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Weapon",
+   "Friend"
+  ],
   "tooltips": [],
-  "nameCn": ""
+  "nameCn": "",
+  "startingTier": "Silver",
+  "id": "95b3dc70-822e-4973-a567-e8d00e1ad9ee"
  },
  "bilge worm": {
   "name": "Bilge Worm",
   "source": "buildsite",
   "build_count": 1,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Vanessa"
+  ],
+  "tags": [
+   "Weapon",
+   "Aquatic"
+  ],
   "tooltips": [],
-  "nameCn": ""
+  "nameCn": "",
+  "startingTier": "Bronze",
+  "id": "ee318a20-e1a0-4651-a904-a1e6c3939c97"
  },
  "campfire": {
   "name": "Campfire",
   "source": "buildsite",
   "build_count": 1,
-  "size": null,
-  "heroes": [],
+  "size": "Medium",
+  "heroes": [
+   "Karnok"
+  ],
   "tags": [],
   "tooltips": [],
-  "nameCn": ""
+  "nameCn": "",
+  "startingTier": "Silver",
+  "id": "f95df8c9-c04c-4872-ba99-006f1096db64"
  },
  "waystones": {
   "name": "Waystones",
   "source": "buildsite",
   "build_count": 1,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Medium",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Relic"
+  ],
   "tooltips": [],
-  "nameCn": ""
+  "nameCn": "",
+  "startingTier": "Bronze",
+  "id": "de82424c-91e7-41c1-8ed5-edb7408cfad3"
  },
  "premium green piggle": {
   "name": "Premium Green Piggle",
@@ -36297,21 +37097,31 @@
   "name": "Lucky Clover",
   "source": "buildsite",
   "build_count": 1,
-  "size": null,
-  "heroes": [],
+  "size": "Small",
+  "heroes": [
+   "Common"
+  ],
   "tags": [],
   "tooltips": [],
-  "nameCn": ""
+  "nameCn": "",
+  "startingTier": "Bronze",
+  "id": "bf232612-7129-43ec-9a1d-bcd83509a9fb"
  },
  "geyser": {
   "name": "Geyser",
   "source": "buildsite",
   "build_count": 1,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Medium",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Property"
+  ],
   "tooltips": [],
-  "nameCn": ""
+  "nameCn": "",
+  "startingTier": "Silver",
+  "id": "77df36bf-a1d0-4815-9f07-5c330542e76a"
  },
  "hunters boot": {
   "name": "Hunter's Boot",
@@ -36327,21 +37137,33 @@
   "name": "Infused Arm Wraps",
   "source": "buildsite",
   "build_count": 1,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Medium",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Apparel"
+  ],
   "tooltips": [],
-  "nameCn": ""
+  "nameCn": "",
+  "startingTier": "Silver",
+  "id": "77538c26-6234-4db2-8eef-3414849272e9"
  },
  "healing draught": {
   "name": "Healing Draught",
   "source": "buildsite",
   "build_count": 1,
-  "size": null,
-  "heroes": [],
-  "tags": [],
+  "size": "Small",
+  "heroes": [
+   "Karnok"
+  ],
+  "tags": [
+   "Potion"
+  ],
   "tooltips": [],
-  "nameCn": ""
+  "nameCn": "",
+  "startingTier": "Gold",
+  "id": "aa62a20d-f33e-4389-a359-fd590ea5cef5"
  },
  "spiked colla": {
   "name": "spiked colla",

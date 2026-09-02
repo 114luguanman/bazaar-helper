@@ -1385,11 +1385,15 @@ class Panel(QWidget):
                 if kind == "items":
                     n = len(datahub.fetch_items(refresh=True))
                 elif kind == "qiubot":
-                    # 刷新当前英雄 + 双龙的天梯组合
+                    # 刷新当前英雄 + 双龙的天梯组合（去重：当前英雄就是双龙时只请求一次）
                     hero = self.cfg.get("hero", "mak")
-                    n1 = len(datahub.qiubot_builds(hero, refresh=True))
-                    n2 = len(datahub.qiubot_builds("dragons", refresh=True))
-                    n = n1 + n2
+                    heroes_to_fetch = ["dragons"]
+                    if hero != "dragons":
+                        heroes_to_fetch.append(hero)
+                    n = 0
+                    for h in heroes_to_fetch:
+                        comp = datahub.fetch_qiubot_comp(h, refresh=True)
+                        n += len(comp.get("layers") or [])
                 else:
                     n = len(datahub.fetch_builds(self.cfg.get("hero", "mak"), refresh=True))
                 return n, None
@@ -1411,21 +1415,35 @@ class Panel(QWidget):
 
         # 后台线程执行（避免网络请求卡住界面）
         import threading
-        th = threading.Thread(target=lambda: QMetaObject.invokeMethod(
-            self, "_on_data_done", Qt.QueuedConnection,
-            Q_ARG(int, 0), Q_ARG(str, "")), daemon=True)
+
         # 用简单闭包传递结果
         result = {}
+        _finished = threading.Event()
 
         def runner():
-            n, err = work()
+            try:
+                n, err = work()
+            except Exception as e:  # work 内部已 try，此处兜底
+                n, err = 0, str(e)
             result["n"], result["err"] = n, err
+            _finished.set()
             QMetaObject.invokeMethod(self, "_on_data_done", Qt.QueuedConnection)
 
         self._data_result = result
         self._data_callback = done
         th = threading.Thread(target=runner, daemon=True)
         th.start()
+
+        # 总超时看门狗：网络异常（DNS 卡死等）导致线程池永久等待时，
+        # 强制结束转圈并提示，避免界面永远卡住。
+        def watchdog():
+            if _finished.wait(150):
+                return
+            result.setdefault("n", 0)
+            result["err"] = (result.get("err") or "") or "更新超时（网络异常），请检查网络后重试"
+            QMetaObject.invokeMethod(self, "_on_data_done", Qt.QueuedConnection)
+
+        threading.Thread(target=watchdog, daemon=True).start()
 
     def _on_data_done(self):
         """后台数据更新完成回调（GUI 线程）。"""
