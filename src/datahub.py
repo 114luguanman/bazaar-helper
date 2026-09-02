@@ -43,7 +43,7 @@ class FetchError(Exception):
     pass
 
 
-def _http_get_json(url: str, retries: int = 3, timeout: int = 40):
+def _http_get_json(url: str, retries: int = 2, timeout: int = 12):
     last = None
     for i in range(retries):
         try:
@@ -52,7 +52,7 @@ def _http_get_json(url: str, retries: int = 3, timeout: int = 40):
                 return json.loads(r.read().decode("utf-8", "replace"))
         except Exception as e:  # noqa: BLE001
             last = e
-            time.sleep(1.5 * (i + 1))
+            time.sleep(0.8 * (i + 1))
     raise FetchError(f"请求失败: {url} -> {last}")
 
 
@@ -90,17 +90,35 @@ def _fetch_item_tags(refresh: bool = False) -> dict:
     if not refresh and os.path.exists(config.TAGS_CACHE_PATH):
         return config.load_json(config.TAGS_CACHE_PATH) or {}
     tags = {}
-    page = 1
-    while page <= 40:
-        batch = _http_get_json(f"{WP_BASE}/tags?per_page=100&page={page}&_fields=id,name,count&orderby=count&order=desc")
-        if not batch:
-            break
-        for t in batch:
-            tags[t["id"]] = [t.get("name"), t.get("count", 0)]
-        if len(batch) < 100:
-            break
-        page += 1
-        time.sleep(0.2)
+    # 首页确定总页数（响应头 X-WP-TotalPages），再并发拉剩余页
+    def _get_tags_page(p):
+        return _http_get_json(f"{WP_BASE}/tags?per_page=100&page={p}&_fields=id,name,count&orderby=count&order=desc")
+
+    first, total_pages = [], 1
+    try:
+        req = urllib.request.Request(
+            f"{WP_BASE}/tags?per_page=100&page=1&_fields=id,name,count&orderby=count&order=desc",
+            headers=UA)
+        with urllib.request.urlopen(req, timeout=12) as r:
+            first = json.loads(r.read().decode("utf-8", "replace"))
+            total_pages = int(r.headers.get("X-WP-TotalPages") or 1)
+    except Exception:
+        try:
+            first = _get_tags_page(1)
+        except FetchError:
+            first = []
+    for t in first:
+        tags[t["id"]] = [t.get("name"), t.get("count", 0)]
+    if total_pages > 1:
+        from concurrent.futures import ThreadPoolExecutor
+        with ThreadPoolExecutor(max_workers=6) as ex:
+            futs = [ex.submit(_get_tags_page, p) for p in range(2, min(total_pages, 40) + 1)]
+            for fu in futs:
+                try:
+                    for t in fu.result():
+                        tags[t["id"]] = [t.get("name"), t.get("count", 0)]
+                except FetchError:
+                    continue
     config.ensure_dirs()
     with open(config.TAGS_CACHE_PATH, "w", encoding="utf-8") as f:
         json.dump(tags, f, ensure_ascii=False)
@@ -240,23 +258,32 @@ def fetch_heroes(refresh: bool = False) -> dict:
     if not refresh and os.path.exists(config.HEROES_PATH):
         return config.load_json(config.HEROES_PATH) or {}
     heroes = {}
-    for hero in HEROES:
+    from concurrent.futures import ThreadPoolExecutor
+
+    def _fetch_one(hero):
         try:
-            res = _http_get_json(f"{WP_BASE}/categories?search={hero}&per_page=100")
+            return hero, _http_get_json(f"{WP_BASE}/categories?search={hero}&per_page=100")
         except FetchError:
-            continue
-        # 优先 <hero>-builds 分类（实际存放流派）；其次 slug==hero 且有帖子数的分类
-        def pick():
-            pref = [c for c in res if c.get("slug") == f"{hero}-builds"]
-            if pref:
-                return pref[0]
-            for c in res:
-                if c.get("slug") == hero and c.get("count", 0) > 0:
-                    return c
-            return None
-        c = pick()
-        if c:
-            heroes[hero] = {"id": c["id"], "name": c["name"], "slug": c["slug"], "count": c.get("count", 0)}
+            return hero, None
+
+    with ThreadPoolExecutor(max_workers=6) as ex:
+        results = [ex.submit(_fetch_one, h) for h in HEROES]
+        for fu in results:
+            hero, res = fu.result()
+            if not res:
+                continue
+            # 优先 <hero>-builds 分类（实际存放流派）；其次 slug==hero 且有帖子数的分类
+            def pick():
+                pref = [c for c in res if c.get("slug") == f"{hero}-builds"]
+                if pref:
+                    return pref[0]
+                for c in res:
+                    if c.get("slug") == hero and c.get("count", 0) > 0:
+                        return c
+                return None
+            c = pick()
+            if c:
+                heroes[hero] = {"id": c["id"], "name": c["name"], "slug": c["slug"], "count": c.get("count", 0)}
     config.ensure_dirs()
     with open(config.HEROES_PATH, "w", encoding="utf-8") as f:
         json.dump(heroes, f, ensure_ascii=False, indent=1)
@@ -312,41 +339,70 @@ def fetch_builds(hero: str, refresh: bool = False) -> list:
     cat_id = info["id"]
 
     posts = []
-    page = 1
-    while page <= 30:
-        batch = _http_get_json(
-            f"{WP_BASE}/posts?categories={cat_id}&per_page=100&page={page}"
+    # 首页确定总页数（响应头 X-WP-TotalPages），再并行拉剩余页，避免无效请求
+    def _get_posts_page(p):
+        return _http_get_json(
+            f"{WP_BASE}/posts?categories={cat_id}&per_page=100&page={p}"
             "&_fields=id,date,modified,slug,title,link,categories,tags,excerpt"
         )
-        if not batch:
-            break
-        posts.extend(batch)
-        if len(batch) < 100:
-            break
-        page += 1
-        time.sleep(0.3)
 
-    # tag id -> 物品名
+    first, total_pages = 1, 1
+    try:
+        req = urllib.request.Request(
+            f"{WP_BASE}/posts?categories={cat_id}&per_page=100&page=1"
+            "&_fields=id,date,modified,slug,title,link,categories,tags,excerpt",
+            headers=UA)
+        with urllib.request.urlopen(req, timeout=12) as r:
+            first = json.loads(r.read().decode("utf-8", "replace"))
+            total_pages = int(r.headers.get("X-WP-TotalPages") or 1)
+    except Exception:
+        try:
+            first = _get_posts_page(1)
+        except FetchError:
+            first = []
+    if first:
+        posts.extend(first)
+    if total_pages > 1:
+        from concurrent.futures import ThreadPoolExecutor
+        with ThreadPoolExecutor(max_workers=6) as ex:
+            futs = [ex.submit(_get_posts_page, p) for p in range(2, min(total_pages, 30) + 1)]
+            for fu in futs:
+                try:
+                    posts.extend(fu.result())
+                except FetchError:
+                    continue
+
+    # tag id -> 物品名（分块并发）
     tag_ids = sorted({t for p in posts for t in (p.get("tags") or [])})
     tagmap = {}
-    for i in range(0, len(tag_ids), 90):
-        chunk = tag_ids[i:i + 90]
-        try:
-            tags = _http_get_json(f"{WP_BASE}/tags?include={','.join(map(str, chunk))}&per_page=100&_fields=id,name")
-            tagmap.update({t["id"]: t["name"] for t in tags})
-        except FetchError:
-            pass
+    chunks = [tag_ids[i:i + 90] for i in range(0, len(tag_ids), 90)]
+    if chunks:
+        from concurrent.futures import ThreadPoolExecutor
+        with ThreadPoolExecutor(max_workers=6) as ex:
+            futs = [ex.submit(_http_get_json,
+                              f"{WP_BASE}/tags?include={','.join(map(str, c))}&per_page=100&_fields=id,name")
+                    for c in chunks]
+            for fu in futs:
+                try:
+                    tagmap.update({t["id"]: t["name"] for t in fu.result()})
+                except FetchError:
+                    pass
 
-    # category id -> 流派类型
+    # category id -> 流派类型（分块并发）
     cat_ids = sorted({c for p in posts for c in (p.get("categories") or [])})
     catmap = {}
-    for i in range(0, len(cat_ids), 90):
-        chunk = cat_ids[i:i + 90]
-        try:
-            cats = _http_get_json(f"{WP_BASE}/categories?include={','.join(map(str, chunk))}&per_page=100&_fields=id,name,slug")
-            catmap.update({c["id"]: c["name"] for c in cats})
-        except FetchError:
-            pass
+    chunks = [cat_ids[i:i + 90] for i in range(0, len(cat_ids), 90)]
+    if chunks:
+        from concurrent.futures import ThreadPoolExecutor
+        with ThreadPoolExecutor(max_workers=6) as ex:
+            futs = [ex.submit(_http_get_json,
+                              f"{WP_BASE}/categories?include={','.join(map(str, c))}&per_page=100&_fields=id,name,slug")
+                    for c in chunks]
+            for fu in futs:
+                try:
+                    catmap.update({c["id"]: c["name"] for c in fu.result()})
+                except FetchError:
+                    pass
 
     builds = []
     for p in posts:
